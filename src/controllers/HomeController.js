@@ -78,6 +78,7 @@ function handleMessage(sender_psid, received_message){
             "text": `you sent the message: "${received_message.text}". Now send me an image!`
         }
     } else if (received_message.attachments){
+        
         //gets the URL of the message attachment
         let attachment_url = received_message.attachments[0].payload.url;
         response = {
