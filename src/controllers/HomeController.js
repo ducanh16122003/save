@@ -82,7 +82,11 @@ function handleMessage(sender_psid, received_message){
 }
 //handles messaging_postbacks events
 function handlePostback(sender_psid, received_postback){
-//Construct the message body
+
+}
+//Sends response messages via the Send API
+function callSendAPI(sender_psid, response){
+    //Construct the message body
 let request_body = {
     "recipient": {
         "id": sender_psid
@@ -103,10 +107,6 @@ request({
         console.error("unable to send message:" + err);
     }
 })
-}
-//Sends response messages via the Send API
-function callSendAPI(sender_psid, response){
-    
 }
 
 module.exports = {
