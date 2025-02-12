@@ -139,8 +139,8 @@ let request_body = {
 
 //Send the HTTP request to the Messenger Platform
 request({
-    "uri": "https://graph.facebook.com/v22.0/me/messages",
-    "qs" : { "access_token": process.env.access_token },
+    "uri": "https://graph.facebook.com/v21.0/me/messages",
+    "qs" : { "access_token": process.env.page_access_token },
     "method": "POST",
     "json": request_body
 },(err, res, body) => {
