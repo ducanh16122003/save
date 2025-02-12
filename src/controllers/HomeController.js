@@ -112,8 +112,21 @@ function handleMessage(sender_psid, received_message){
 }
 //handles messaging_postbacks events
 function handlePostback(sender_psid, received_postback){
+    let response;
 
+    //get the payload for the postback
+    let payload = received_postback.payload;
+
+    //set the respose based on the postback payload
+    if (payload === 'yes') {
+        response = {"text": "Thanks!"}
+    } else if (payload === 'no') {
+        response = {"text": "Oops, try sending another image."}
+    }
+    //Send the message to acknowledge the postback
+    callSendAPI(sender_psid, response);
 }
+
 //Sends response messages via the Send API
 function callSendAPI(sender_psid, response){
     //Construct the message body
