@@ -179,8 +179,6 @@ await request({
     }
 });
     return res.send("Setup user profile succeeds!");
-
-
 }
 module.exports = {
     getHomePage: getHomePage,
