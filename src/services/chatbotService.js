@@ -23,12 +23,12 @@ let callSendAPI = (sender_psid, response) => {
         } else {
             console.error("unable to send message:" + err);
         }
-    })
+    });
 }
 let handleGetStarted = (sender_psid) => {
     return new Promise(async (resolve, reject) => {
         try{
-            let response = {"text": "OK. Xin chào bạn NDA đến với nhà hàng của Bli"}
+            let response = { "text": "OK. Xin chào bạn NDA đến với nhà hàng của Bli"}
             await callSendAPI(sender_psid, response);
             resolve('done');
         }catch(e){
