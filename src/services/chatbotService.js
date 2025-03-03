@@ -33,15 +33,15 @@ let getUserName = (sender_psid) => {
             "method": "GET",
         }, (err, res, body) => {
             if (!err) {
-                let user = JSON.parse(body);
-                let userName = `${user.first_name} ${user.last_name}`;
+                body = JSON.parse(body);
+                let userName = `${body.first_name} ${body.last_name}`;
                 resolve(userName);
             } else {
                 console.error("Unable to send message:" + err);
                 reject(err);
             }
         });
-    });
+    })
 }
 
 let handleGetStarted = async (sender_psid) => {
@@ -57,7 +57,7 @@ let handleGetStarted = async (sender_psid) => {
 });
 }
 
-module.exports = {
-    handleGetStarted: handleGetStarted,
-    getUserName: getUserName,
+export default {
+    handleGetStarted,
+    getUserName,
 };

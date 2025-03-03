@@ -128,8 +128,8 @@ async function handlePostback(sender_psid, received_postback){
             response = {"text": `Oops, try sending another image.`}
             break;
         case 'GET_STARTED':
-            await chatbotService.handleGetStarted(sender_psid);
-            break;
+            await chatbotService.handleGetStarrted(sender_psid);
+            return;
         default:
             response = {"text": `Oops! I don't know how to respond to postback ${payload}.`}
     }
@@ -152,7 +152,6 @@ request({
     "uri": "https://graph.facebook.com/v21.0/me/messages",
     "qs" : { "access_token": process.env.page_access_token },
     "method": "POST",
-    "headers": { "Content-Type": "application/json" },
     "json": request_body
 },(err, res, body) => {
     if (!err) {
