@@ -1,5 +1,6 @@
 const { response, request: expressRequest } = require('express');
 import request from "request";
+import chatbotService from "../services/chatbotService";
 require('dotenv').config();
 
 const page_access_token = process.env.PAGE_ACCESS_TOKEN;
@@ -128,14 +129,14 @@ async function handlePostback(sender_psid, received_postback){
             response = {"text": "Oops, try sending another image."}
             break;
         case 'GET_STARTED':
-            response = {"text": "chào mừng đến với bình nguyên vô tận"}
+            response = {"text": `Chào mừng đến với bình nguyên vô tận!`}
             break;
         default:
             response = {"text": `oops! I don't know response with postback ${payload}`}
         
     }
     //Send the message to acknowledge the postback
-    callSendAPI(sender_psid, response);
+    //callSendAPI(sender_psid, response);
 }
 
 //Sends response messages via the Send API
@@ -163,58 +164,6 @@ request({
     }
 })
 }
-const getUserProfile = (sender_psid) => {
-    return new Promise((resolve, reject) => {
-        let url = `https://graph.facebook.com/${sender_psid}?fields=first_name,last_name&access_token=${page_access_token}`;
-
-        request({ uri: url, method: "GET" }, (err, res, body) => {
-            if (!err) {
-                let userData = JSON.parse(body);
-                resolve(userData);
-            } else {
-                reject("❌ Error getting user profile: " + err);
-            }
-        });
-    });
-};
-
-// Xử lý sự kiện khi nhấn "Get Started"
-const handleGetStarted = async (sender_psid) => {
-    try {
-        console.log("📩 handleGetStarted() called for PSID:", sender_psid);
-
-        // Lấy tên người dùng
-        let userData = await getUserProfile(sender_psid);
-        let userName = userData.first_name || "bạn";
-
-        // Gửi tin nhắn chào
-        let response = { text: `🎉 Chào ${userName}! Chào mừng bạn đến với nhà hàng của Bli! 🏡🍽` };
-        await callSendAPI(sender_psid, response);
-    } catch (e) {
-        console.error("❌ Error in handleGetStarted:", e);
-    }
-};
-
-// Xử lý postback từ Messenger
-const handlePostback = async (sender_psid, received_postback) => {
-    let payload = received_postback.payload;
-
-    switch (payload) {
-        case "GET_STARTED":
-            await handleGetStarted(sender_psid);
-            break;
-
-        default:
-            let response = { text: `❓ Không hiểu lệnh: ${payload}` };
-            callSendAPI(sender_psid, response);
-            break;
-    }
-};
-
-// Xuất các hàm để sử dụng trong HomeController
-
-    
-
 
 let setupProfile = async (req, res) =>{
     //call profile facebook api
@@ -246,5 +195,4 @@ module.exports = {
     postWebhook: postWebhook,
     getWebhook: getWebhook,
     setupProfile: setupProfile,
-    handlePostback: handlePostback
 }
