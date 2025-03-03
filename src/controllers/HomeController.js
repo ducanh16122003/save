@@ -128,6 +128,7 @@ async function handlePostback(sender_psid, received_postback){
         case 'no':
             response = {"text": `Oops, try sending another image.`}
             break;
+            
         case 'GET_STARTED':
             response = {"text": `Welcome to my nhà hàng!`}
             break;
