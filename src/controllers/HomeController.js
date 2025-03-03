@@ -1,6 +1,5 @@
 const { response, request: expressRequest } = require('express');
 import request from "request"
-import chatbotService from "../services/chatbotService";
 require('dotenv').config();
 
 const page_access_token = process.env.PAGE_ACCESS_TOKEN;
@@ -114,7 +113,7 @@ function handleMessage(sender_psid, received_message){
     callSendAPI(sender_psid, response);
 }
 //handles messaging_postbacks events
-async function handlePostback(sender_psid, received_postback){
+function handlePostback(sender_psid, received_postback){
     let response;
 
     //get the payload for the postback
@@ -130,7 +129,7 @@ async function handlePostback(sender_psid, received_postback){
             break;
 
         case 'GET_STARTED':
-            await chatbotService.handleGetStarted(sender_psid);
+            response = {"text": "OK. Xin chào bạn ABC đến với nhà hàng của Bli"}
             break;
         default:
             response = {"text": `oops! I don't know response with postback ${payload}`}
