@@ -16,7 +16,6 @@ let callSendAPI = (sender_psid, response) => {
         "uri": "https://graph.facebook.com/v21.0/me/messages",
         "qs": { "access_token": page_access_token },
         "method": "POST",
-        "headers": { "Content-Type": "application/json" },
         "json": request_body
     }, (err, res, body) => {
         if (!err) {
