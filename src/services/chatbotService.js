@@ -60,5 +60,4 @@ let handleGetStarted = async (sender_psid) => {
 module.exports = {
     handleGetStarted: handleGetStarted,
     getUserName: getUserName,
-    callSendAPI: callSendAPI,
 };
