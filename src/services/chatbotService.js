@@ -2,7 +2,7 @@ import request from "request";
 require('dotenv').config();
 
 const page_access_token = process.env.PAGE_ACCESS_TOKEN;
-let callSendAPI = (response) => {
+let callSendAPI = (response, sender_psid) => {
     //Construct the message body
     let request_body = {
         "recipient": {
@@ -30,7 +30,7 @@ let handleGetStarted = () => {
     return Promise(async (resolve, reject) => {
         try{
             let response = {"text": "OK. Xin chào bạn ABC đến với nhà hàng của Bli"}
-            await this.callSendAPI(response);
+            await callSendAPI(response, sender_psid);
             resolve('done');
         }catch(e){
             reject(e);
