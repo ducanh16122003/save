@@ -29,7 +29,7 @@ let callSendAPI = (sender_psid, response) => {
 let getUserName = (sender_psid) => {
     return new Promise((resolve, reject) => {
         request({
-            "uri": `https://graph.facebook.com/${sender_psid}?fields=first_name,last_name,profile_pic&access_token=${page_access_token}`,
+            "uri": `https://graph.facebook.com/${sender_psid}?fields=first_name,last_name,profile_pic&access_token=${PAGE_ACCESS_TOKEN}`,
             "method": "GET",
         }, (err, res, body) => {
             if (!err) {
@@ -50,9 +50,8 @@ let handleGetStarted = (sender_psid) => {
         let userName = await getUserName(sender_psid);
         let response = { "text": `Chào mừng đến với bình nguyên vô tận, ${userName}!` }
         await callSendAPI(sender_psid, response);
-        resolve("done");
+        resolve('done');
     } catch (e) {
-        console.log(e);
         reject(e);
     }
 });
