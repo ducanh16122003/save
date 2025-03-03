@@ -114,35 +114,30 @@ function handleMessage(sender_psid, received_message){
     callSendAPI(sender_psid, response);
 }
 //handles messaging_postbacks events
-async function handlePostback(sender_psid, received_postback) {
+async function handlePostback(sender_psid, received_postback){
     let response;
 
-    // Get and normalize the payload
-    let payload = received_postback.payload.trim().toLowerCase();
+    //get the payload for the postback
+    let payload = received_postback.payload;
 
-    // Set the response based on the postback payload
+    //set the respose based on the postback payload
     switch (payload) {
         case 'yes':
-            response = { "text": "Thanks!" };
+            response = {"text": "Thanks!"};
             break;
         case 'no':
-            response = { "text": "Oops, try sending another image." };
+            response = {"text": "Oops, try sending another image."};
             break;
-        case 'get_started': // Chuyển về lowercase
+        case 'GET_STARTED':
             await chatbotService.handleGetStarted(sender_psid);
-            return; // Không cần gửi thêm response
+            break;
         default:
-            response = { "text": `Oops! I don't know response with postback ${payload}` };
+            response = {"text": `oops! I don't know response with postback ${payload}`};
+        
     }
-
-    // Gửi tin nhắn nếu có response
-    if (response) {
-        await callSendAPI(sender_psid, response);
-    }
-}
     //Send the message to acknowledge the postback
     //callSendAPI(sender_psid, response);
-
+}
 
 //Sends response messages via the Send API
 function callSendAPI(sender_psid, response){
