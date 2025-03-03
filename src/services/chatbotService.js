@@ -4,6 +4,7 @@ require('dotenv').config();
 const page_access_token = process.env.PAGE_ACCESS_TOKEN;
 
 let callSendAPI = (sender_psid, response) => {
+    return new Promise((resolve, reject) => {
     // Construct the message body
     let request_body = {
         "recipient": {
@@ -25,6 +26,7 @@ let callSendAPI = (sender_psid, response) => {
             console.error("unable to send message:" + err);
         }
     })
+})
 }
 
 let getUserName = (sender_psid) => {
