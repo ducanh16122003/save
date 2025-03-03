@@ -129,6 +129,7 @@ async function handlePostback(sender_psid, received_postback){
             break;
         case 'GET_STARTED':
             await chatbotService.handleGetStarted(sender_psid);
+            response = {"text": `Chào mừng đến với bình nguyên vô tận! ${userName}`}
             break;
         default:
             response = {"text": `Oops! I don't know how to respond to postback ${payload}.`}
