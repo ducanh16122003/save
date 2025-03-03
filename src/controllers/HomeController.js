@@ -67,11 +67,6 @@ let getWebhook = (req, res) => {
     }
 }
 
-let handleGetStarted = async (sender_psid) => {
-    let response = { text: "Chào mừng bạn đến với chatbot!" };
-
-    await callSendAPI(sender_psid, response);
-};
 //handles messages events
 function handleMessage(sender_psid, received_message){
     let response;
