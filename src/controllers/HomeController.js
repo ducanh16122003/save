@@ -5,7 +5,7 @@ require("dotenv").config();
 
 const page_access_token = process.env.PAGE_ACCESS_TOKEN;
 
-let setUpMessengerPlatform = (PAGE_ACCESS_TOKEN) => {
+let setUpMessengerPlatform = (page_access_token) => {
     return new Promise((resolve, reject) => {
         try {
             let data = {
