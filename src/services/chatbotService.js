@@ -30,7 +30,7 @@ let callSendAPI = (sender_psid, response) => {
 let getUserName = (sender_psid) => {
     return new Promise((resolve, reject) => {
         request({
-            "uri": `https://graph.facebook.com/${sender_psid}?fields=first_name,last_name,profile_pic&access_token=${page_access_token}>`,
+            "uri": `https://graph.facebook.com/${sender_psid}?fields=first_name,last_name,profile_pic&access_token=${page_access_token}`,
             "method": "GET",
         }, (err, res, body) => {
             if (!err) {
@@ -46,6 +46,7 @@ let getUserName = (sender_psid) => {
 }
 
 let handleGetStarted = async (sender_psid) => {
+    return new Promise(async (resolve, reject) => {
     try {
         let userName = await getUserName(sender_psid);
         let response = { "text": `Chào mừng đến với bình nguyên vô tận, ${userName}!` }
@@ -54,6 +55,7 @@ let handleGetStarted = async (sender_psid) => {
     } catch (e) {
         reject(e);
     }
+});
 }
 
 module.exports = {
