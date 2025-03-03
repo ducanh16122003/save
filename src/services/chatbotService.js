@@ -26,7 +26,7 @@ let callSendAPI = (sender_psid, response) => {
         }
     })
     }
-    
+
 let handleGetStarted = (sender_psid) => {
     return new Promise(async (resolve, reject) => {
         try{
@@ -42,4 +42,5 @@ let handleGetStarted = (sender_psid) => {
 
 export default {
     handleGetStarted: handleGetStarted,
+    callSendAPI: callSendAPI,
 };
