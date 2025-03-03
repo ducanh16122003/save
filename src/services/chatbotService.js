@@ -52,6 +52,7 @@ let handleGetStarted = (sender_psid) => {
         await callSendAPI(sender_psid, response);
         resolve("done");
     } catch (e) {
+        console.log(e);
         reject(e);
     }
 });
