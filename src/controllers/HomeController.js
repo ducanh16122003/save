@@ -1,4 +1,3 @@
-const { response, request: expressRequest } = require('express');
 import request from "request";
 import chatbotService from "../services/chatbotService";
 require('dotenv').config();
