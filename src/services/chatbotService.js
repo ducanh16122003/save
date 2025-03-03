@@ -32,8 +32,7 @@ request({
 let handleGetStarted = (sender_psid) => {
     return new Promise(async (resolve, reject) => {
         try{
-            let username = await getUserName(sender_psid);
-            let response = {"text": `OK. Xin chào bạn ${username} đến với nhà hàng của Bli`}
+            let response = {"text": `OK. Xin chào bạn ABC đến với nhà hàng của Bli`}
             await callSendAPI(sender_psid, response);
             resolve('done');
         }catch(e){
