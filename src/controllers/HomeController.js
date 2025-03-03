@@ -120,20 +120,22 @@ async function handlePostback(sender_psid, received_postback){
     //get the payload for the postback
     let payload = received_postback.payload;
 
-    //set the respose based on the postback payload
+    //get the user's name
+    let userName = await chatbotService.getUserName(sender_psid);
+
+    //set the response based on the postback payload
     switch (payload) {
         case 'yes':
-            response = {"text": "Thanks!"}
+            response = {"text": `Thanks, ${userName}!`}
             break;
         case 'no':
-            response = {"text": "Oops, try sending another image."}
+            response = {"text": `Oops, try sending another image, ${userName}.`}
             break;
         case 'GET_STARTED':
-            response = {"text": "Chào mừng đến với bình nguyên vô tận!"}
+            response = {"text": `Chào mừng đến với bình nguyên vô tận, ${userName}!`}
             break;
         default:
-            response = {"text": `oops! I don't know response with postback ${payload}`}
-        
+            response = {"text": `Oops! I don't know how to respond to postback ${payload}, ${userName}.`}
     }
     //Send the message to acknowledge the postback
     callSendAPI(sender_psid, response);
