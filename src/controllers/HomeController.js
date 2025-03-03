@@ -1,17 +1,11 @@
 const { response, request: expressRequest } = require('express');
 import request from "request";
-const chatbotService = require ("../services/chatbotService");
+import chatbotService from "../services/chatbotService";
 require('dotenv').config();
 
 const page_access_token = process.env.PAGE_ACCESS_TOKEN;
 
 //process.env.NAME_VARIABLES
-
-
-// Xuất module để dùng trong file webhook chính
-module.exports = {
-    handlePostback,
-};
 let getHomePage = (req, res) => {
     return res.render('homepage.ejs');
 };
@@ -120,11 +114,6 @@ function handleMessage(sender_psid, received_message){
     callSendAPI(sender_psid, response);
 }
 //handles messaging_postbacks events
-let handleGetStarted = async (sender_psid) => {
-    console.log("📢 handleGetStarted() called for:", sender_psid);
-    let response = { text: "Xin chào! Chào mừng bạn đến với nhà hàng của chúng tôi! 🍽️" };
-    await callSendAPI(sender_psid, response);
-};
 async function handlePostback(sender_psid, received_postback){
     let response;
 
@@ -133,29 +122,18 @@ async function handlePostback(sender_psid, received_postback){
 
     //set the respose based on the postback payload
     switch (payload) {
-        case "GET_STARTED":
-            await handleGetStarted(sender_psid);
+        case 'yes':
+            response = {"text": "Thanks!"}
             break;
-
-        case "MENU":
-            response = { text: "🍽️ Đây là menu của chúng tôi!" };
+        case 'no':
+            response = {"text": "Oops, try sending another image."}
             break;
-
-        case "ORDER_FOOD":
-            response = { text: "📦 Vui lòng chọn món bạn muốn đặt hàng!" };
+        case 'GET_STARTED':
+            response = {"text": "chào mừng đến với bình nguyên vô tận"}
             break;
-
-        case "CONTACT_SUPPORT":
-            response = { text: "📞 Bạn có thể liên hệ hỗ trợ qua số 0123-456-789." };
-            break;
-
         default:
-            response = { text: `🤖 Tôi chưa hiểu lệnh này: ${payload}` };
-            break;
-    }
-
-    if (response) {
-        await callSendAPI(sender_psid, response);
+            response = {"text": `oops! I don't know response with postback ${payload}`}
+        
     }
     //Send the message to acknowledge the postback
     //callSendAPI(sender_psid, response);
@@ -217,5 +195,4 @@ module.exports = {
     postWebhook: postWebhook,
     getWebhook: getWebhook,
     setupProfile: setupProfile,
-    handlePostback: handlePostback
 }
