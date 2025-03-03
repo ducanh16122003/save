@@ -67,6 +67,11 @@ let getWebhook = (req, res) => {
     }
 }
 
+let handleGetStarted = async (sender_psid) => {
+    let response = { text: "Chào mừng bạn đến với chatbot!" };
+
+    await callSendAPI(sender_psid, response);
+};
 //handles messages events
 function handleMessage(sender_psid, received_message){
     let response;
@@ -127,13 +132,9 @@ async function handlePostback(sender_psid, received_postback){
         case 'no':
             response = {"text": `Oops, try sending another image.`}
             break;
-            case 'GET_STARTED':
-                await chatbotService.handleGetStarted(sender_psid).then(() => {
-                    console.log("✅ Đã xử lý GET_STARTED thành công!");
-                }).catch(err => {
-                    console.error("❌ Lỗi khi xử lý GET_STARTED:", err);
-                });
-                break;
+        case 'GET_STARTED':
+            response = {"text": `Chào mừng bạn đến với nhà hàng của Bli.`}
+            break;
         default:
             response = {"text": `Oops! I don't know how to respond to postback ${payload}.`}
     }
@@ -198,4 +199,5 @@ module.exports = {
     postWebhook: postWebhook,
     getWebhook: getWebhook,
     setupProfile: setupProfile,
+    handleGetStarted: handleGetStarted,
 }
