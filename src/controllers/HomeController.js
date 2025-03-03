@@ -67,11 +67,6 @@ let getWebhook = (req, res) => {
     }
 }
 
-let handleGetStarted = (sender_psid) => {
-    let response = { text: "Chào mừng bạn đến với chatbot!" };
-
-    callSendAPI(sender_psid, response);
-};
 //handles messages events
 function handleMessage(sender_psid, received_message){
     let response;
@@ -134,6 +129,7 @@ async function handlePostback(sender_psid, received_postback){
             break;
         case 'GET_STARTED':
             response = {"text": `Chào mừng bạn đến với nhà hàng của Bli.`}
+            response = {"text": `Ở đây có rất nhiều món ăn khác nhau như thịt, cá,....`}
             break;
         default:
             response = {"text": `Oops! I don't know how to respond to postback ${payload}.`}
