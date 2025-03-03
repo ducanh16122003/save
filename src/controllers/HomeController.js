@@ -128,8 +128,10 @@ async function handlePostback(sender_psid, received_postback){
             response = {"text": `Oops, try sending another image.`}
             break;
         case 'GET_STARTED':
-            response = {"text": `Chào mừng bạn đến với nhà hàng của Bli.`}
-            response = {"text": `Ở đây có rất nhiều món ăn khác nhau như thịt, cá,....`}
+            let response1 = {"text": `Chào mừng bạn đến với nhà hàng của Bli.`}
+            let response2 = {"text": `Ở đây có rất nhiều món ăn khác nhau như thịt, cá,....`}
+            await callSendAPI(sender_psid, response1);
+            await callSendAPI(sender_psid, response2); 
             break;
         default:
             response = {"text": `Oops! I don't know how to respond to postback ${payload}.`}
