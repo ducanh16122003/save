@@ -28,6 +28,7 @@ let callSendAPI = (sender_psid, response) => {
 let handleGetStarted = (sender_psid) => {
     return new Promise(async (resolve, reject) => {
         try{
+            console.log("📩 Received GET_STARTED from:", sender_psid); // Log kiểm tra
             let response = { "text": "OK. Xin chào bạn NDA đến với nhà hàng của Bli"}
             await callSendAPI(sender_psid, response);
             resolve('done');
