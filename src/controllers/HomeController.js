@@ -177,7 +177,7 @@ let request_body = {
 //Send the HTTP request to the Messenger Platform
 await request({
     "uri": `https://graph.facebook.com/v21.0/me/messenger_profile?access_token=${page_access_token}`,
-    "qs" : { "access_token": process.env.page_access_token },
+    "qs" : { "access_token": page_access_token },
     "method": "POST",
     "json": request_body
 },(err, res, body) => {
