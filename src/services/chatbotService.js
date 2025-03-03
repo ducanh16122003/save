@@ -58,7 +58,6 @@ let handleGetStarted = (sender_psid) => {
 });
 }
 
-export default {
-    handleGetStarted,
-    getUserName,
+module.exports = {
+    handleGetStarted: handleGetStarted,
 };
