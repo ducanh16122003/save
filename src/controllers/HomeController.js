@@ -129,6 +129,7 @@ async function handlePostback(sender_psid, received_postback){
             break;
         case 'GET_STARTED':
             response = {"text": `Welcome to my nhà hàng!`}
+            await callSendAPI(sender_psid, response);
             break;
         default:
             response = {"text": `Oops! I don't know how to respond to postback ${payload}.`}
