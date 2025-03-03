@@ -55,7 +55,7 @@ let handleGetStarted = (sender_psid) => {
     } catch (e) {
         reject(e);
     }
-});
+})
 }
 
 module.exports = {
