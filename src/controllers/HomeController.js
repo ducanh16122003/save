@@ -1,4 +1,6 @@
+const { response, request: expressRequest } = require('express');
 import request from "request";
+import chatbotService from "../services/chatbotService";
 require('dotenv').config();
 
 const page_access_token = process.env.PAGE_ACCESS_TOKEN;
@@ -111,60 +113,6 @@ function handleMessage(sender_psid, received_message){
     //sends the response message
     callSendAPI(sender_psid, response);
 }
-
-//Sends response messages via the Send API
-function callSendAPI(sender_psid, response){
-    //Construct the message body
-let request_body = {
-    "recipient": {
-        "id": sender_psid
-    },
-    "message": response
-}
-
-//Send the HTTP request to the Messenger Platform
-request({
-    "uri": "https://graph.facebook.com/v21.0/me/messages",
-    "qs" : { "access_token": process.env.page_access_token },
-    "method": "POST",
-    "json": request_body
-},(err, res, body) => {
-    if (!err) {
-        console.log('message sent!')
-    } else {
-        console.error("unable to send message:" + err);
-    }
-})
-}
-
-let getUserName = (sender_psid) => {
-    return new Promise((resolve, reject) => {
-        request({
-            "uri": `https://graph.facebook.com/${sender_psid}?fields=first_name,last_name,profile_pic&access_token=${page_access_token}`,
-            "method": "GET",
-        }, (err, res, body) => {
-            if (!err) {
-                body = JSON.parse(body);
-                let userName = `${body.first_name} ${body.last_name}`;
-                resolve(userName);
-            } else {
-                console.error("Unable to send message:" + err);
-                reject(err);
-            }
-        });
-    })
-}
-
-let handleGetStarted = async (sender_psid) => {
-    try {
-        let userName = await getUserName(sender_psid);
-        let response = { "text": `Chào mừng đến với bình nguyên vô tận, ${userName}!` }
-        await callSendAPI(sender_psid, response);
-    } catch (e) {
-        console.error(e);
-    }
-}
-
 //handles messaging_postbacks events
 async function handlePostback(sender_psid, received_postback){
     let response;
@@ -181,14 +129,39 @@ async function handlePostback(sender_psid, received_postback){
             response = {"text": `Oops, try sending another image.`}
             break;
         case 'GET_STARTED':
-            await chatbotService.handleGetStarted(sender_psid);
-            response = {"text": `Chào mừng đến với bình nguyên vô tận! ${userName}`}
+            response = {"text": `Welcome to my nhà hàng!`}
             break;
         default:
             response = {"text": `Oops! I don't know how to respond to postback ${payload}.`}
     }
     //Send the message to acknowledge the postback
-    callSendAPI(sender_psid, response);
+    //callSendAPI(sender_psid, response);
+}
+
+//Sends response messages via the Send API
+function callSendAPI(sender_psid, response){
+    //Construct the message body
+let request_body = {
+    "recipient": {
+        "id": sender_psid
+    },
+    "message": response
+}
+
+//Send the HTTP request to the Messenger Platform
+request({
+    "uri": "https://graph.facebook.com/v21.0/me/messages",
+    "qs" : { "access_token": process.env.page_access_token },
+    "method": "POST",
+    "headers": { "Content-Type": "application/json" },
+    "json": request_body
+},(err, res, body) => {
+    if (!err) {
+        console.log('message sent!')
+    } else {
+        console.error("unable to send message:" + err);
+    }
+})
 }
 
 let setupProfile = async (req, res) =>{
@@ -221,6 +194,4 @@ module.exports = {
     postWebhook: postWebhook,
     getWebhook: getWebhook,
     setupProfile: setupProfile,
-    handleGetStarted: handleGetStarted,
-
 }
