@@ -1,3 +1,4 @@
+const { response, request: expressRequest } = require('express');
 import request from "request"
 require('dotenv').config();
 
@@ -119,21 +120,21 @@ function handlePostback(sender_psid, received_postback){
     let payload = received_postback.payload;
 
     //set the respose based on the postback payload
-    switch(payload){
+    switch(payload) {
         case 'yes':
             response = {"text": "Thanks!"}
             break;
         case 'no':
             response = {"text": "Oops, try sending another image."}
             break;
-
         case 'GET_STARTED':
-            response = {"text": "OK. Xin chào bạn ABC đến với nhà hàng của Bli"}
+            response = {"text": "OK. Xin chào bạn XYZ đến với nhà hàng của Bli"}
             break;
         default:
-            response = {"text": `oops! I don't know response with postback ${payload}`}
+            response = {"text": `Oops! i don't know response with postback ${payload}`}
+
     }
-    
+
     //Send the message to acknowledge the postback
     callSendAPI(sender_psid, response);
 }
@@ -161,7 +162,7 @@ request({
     } else {
         console.error("unable to send message:" + err);
     }
-});
+})
 }
 
 let setupProfile = async (req, res) =>{
