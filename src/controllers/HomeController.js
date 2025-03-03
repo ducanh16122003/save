@@ -122,10 +122,10 @@ async function handlePostback(sender_psid, received_postback){
 
     //set the respose based on the postback payload
     switch (payload) {
-        case 'Yes!':
+        case 'yes':
             response = {"text": "Thanks!"};
             break;
-        case 'No!':
+        case 'no':
             response = {"text": "Oops, try sending another image."};
             break;
         case 'GET_STARTED':
