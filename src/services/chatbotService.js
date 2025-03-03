@@ -25,13 +25,15 @@ let callSendAPI = (sender_psid, response) => {
         }
     });
 }
-let handleGetStarted = (sender_psid) => {
+let handleGetStarted = async (sender_psid) => {
     return new Promise(async (resolve, reject) => {
         try{
+            console.log(" handleGetStarted() called for sender_psid:", sender_psid);
             let response = { "text": "OK. Xin chào bạn NDA đến với nhà hàng của Bli"}
             await callSendAPI(sender_psid, response);
             resolve('done');
         }catch(e){
+            console.error(" Error in handleGetStarted:", e);
             reject(e);
         }
     })
