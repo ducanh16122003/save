@@ -1,4 +1,4 @@
-import request from "request"
+import request from "request";
 require('dotenv').config();
 
 const page_access_token = process.env.PAGE_ACCESS_TOKEN;
