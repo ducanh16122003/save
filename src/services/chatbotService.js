@@ -32,7 +32,7 @@ let callSendAPI = (sender_psid, response) => {
 let handleGetStarted = (sender_psid) => {
     return new Promise(async (resolve, reject) => {
     try {
-        let response = { "text": `Chào mừng đến với bình nguyên vô tận, ${userName}!` }
+        let response = { "text": `Chào mừng đến với bình nguyên vô tận!` }
         await callSendAPI(sender_psid, response);
         resolve('done');
     } catch (e) {
