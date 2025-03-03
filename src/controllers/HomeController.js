@@ -122,17 +122,17 @@ async function handlePostback(sender_psid, received_postback){
 
     //set the respose based on the postback payload
     switch (payload) {
-        case 'yes':
-            response = {"text": "Thanks!"}
+        case 'Yes!':
+            response = {"text": "Thanks!"};
             break;
-        case 'no':
-            response = {"text": "Oops, try sending another image."}
+        case 'No!':
+            response = {"text": "Oops, try sending another image."};
             break;
         case 'GET_STARTED':
             await chatbotService.handleGetStarted(sender_psid);
             break;
         default:
-            response = {"text": `oops! I don't know response with postback ${payload}`}
+            response = {"text": `oops! I don't know response with postback ${payload}`};
         
     }
     //Send the message to acknowledge the postback
