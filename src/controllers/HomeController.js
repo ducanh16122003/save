@@ -1,6 +1,6 @@
 const { response, request: expressRequest } = require('express');
 import request from "request";
-import chatbotService from "../services/chatbotService";
+const chatbotService = require ("../services/chatbotService");
 require('dotenv').config();
 
 const page_access_token = process.env.PAGE_ACCESS_TOKEN;
