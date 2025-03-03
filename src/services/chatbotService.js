@@ -1,61 +1,63 @@
 import request from "request";
-import dotenv from "dotenv";
-dotenv.config();
+require('dotenv').config();
 
-const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
+const page_access_token = process.env.PAGE_ACCESS_TOKEN;
 
-// Gửi tin nhắn đến người dùng
 let callSendAPI = (sender_psid, response) => {
+    // Construct the message body
     let request_body = {
-        "recipient": { "id": sender_psid },
+        "recipient": {
+            "id": sender_psid
+        },
         "message": response
-    };
+    }
 
+    // Send the HTTP request to the Messenger Platform
     request({
-        uri: "https://graph.facebook.com/v21.0/me/messages",
-        qs: { access_token: PAGE_ACCESS_TOKEN },
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        json: request_body
+        "uri": "https://graph.facebook.com/v21.0/me/messages",
+        "qs": { "access_token": page_access_token },
+        "method": "POST",
+        "json": request_body
     }, (err, res, body) => {
         if (!err) {
-            console.log("📩 Message sent successfully!");
+            console.log('message sent!')
         } else {
-            console.error("❌ Unable to send message:", err);
+            console.error("unable to send message:" + err);
         }
-    });
-};
+    })
+}
 
-// Lấy thông tin người dùng từ Facebook API
 let getUserName = (sender_psid) => {
     return new Promise((resolve, reject) => {
         request({
-            uri: `https://graph.facebook.com/${sender_psid}?fields=first_name,last_name&access_token=${PAGE_ACCESS_TOKEN}`,
-            method: "GET",
+            "uri": `https://graph.facebook.com/${sender_psid}?fields=first_name,last_name,profile_pic&access_token=${page_access_token}`,
+            "method": "GET",
         }, (err, res, body) => {
             if (!err) {
-                let user = JSON.parse(body);
-                let userName = `${user.first_name} ${user.last_name}`;
+                body = JSON.parse(body);
+                let userName = `${body.first_name} ${body.last_name}`;
                 resolve(userName);
             } else {
-                console.error("❌ Error fetching user name:", err);
+                console.error("Unable to send message:" + err);
                 reject(err);
             }
         });
-    });
-};
+    })
+}
 
-// Xử lý khi nhấn nút "Bắt đầu"
-let handleGetStarted = async (sender_psid) => {
+let handleGetStarted = (sender_psid) => {
+    return new Promise(async (resolve, reject) => {
     try {
         let userName = await getUserName(sender_psid);
-        let response = { "text": `👋 Xin chào, ${userName}! Chào mừng đến với chatbot.` };
+        let response = { "text": `Chào mừng đến với bình nguyên vô tận, ${userName}!` }
         await callSendAPI(sender_psid, response);
-        return "done";
+        resolve('done');
     } catch (e) {
-        console.error("❌ Error in handleGetStarted:", e);
-        throw e;
+        reject(e);
     }
-};
+});
+}
 
-export default { handleGetStarted, getUserName, callSendAPI };
+module.exports = {
+    handleGetStarted: handleGetStarted,
+}

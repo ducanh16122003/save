@@ -128,9 +128,10 @@ async function handlePostback(sender_psid, received_postback){
         case 'no':
             response = {"text": `Oops, try sending another image.`}
             break;
-            
+
         case 'GET_STARTED':
             response = {"text": `Welcome to my nhà hàng!`}
+            await chatbotService.handleGetStarted(sender_psid);
             break;
         default:
             response = {"text": `Oops! I don't know how to respond to postback ${payload}.`}
