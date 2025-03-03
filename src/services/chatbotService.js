@@ -43,10 +43,8 @@ request({
         console.error("unable to send message:" + err);
         reject(err);
     }
-});
-    return username
+        });
     })
-
 }
 
 let handleGetStarted = (sender_psid) => {
