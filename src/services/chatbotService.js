@@ -1,4 +1,5 @@
 import request from "request";
+require('dotenv').config();
 
 const page_access_token = process.env.PAGE_ACCESS_TOKEN;
 
@@ -29,7 +30,7 @@ let callSendAPI = (sender_psid, response) => {
 let getUserName = (sender_psid) => {
     return new Promise((resolve, reject) => {
         request({
-            "uri": `https://graph.facebook.com/${sender_psid}?fields=first_name,last_name,profile_pic&access_token=${PAGE_ACCESS_TOKEN}`,
+            "uri": `https://graph.facebook.com/${sender_psid}?fields=first_name,last_name,profile_pic&access_token=${page_access_token}`,
             "method": "GET",
         }, (err, res, body) => {
             if (!err) {
