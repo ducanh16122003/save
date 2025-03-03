@@ -1,3 +1,4 @@
+import { response } from "express";
 import request from "request"
 require('dotenv').config();
 
@@ -27,11 +28,32 @@ request({
 });
 }
 
+let getUserName = (sender_psid) => {
+    return new Promise((resolve, reject) => {
+//Send the HTTP request to the Messenger Platform
+request({
+    "uri": `https://graph.facebook.com/${sender_psid}?fields=first_name,last_name,profile_pic&access_token=${page_access_token}`,
+    "method": "GET",
+},(err, res, body) => {
+    if (!err) {
+        body = JSON.parse(res);
+        let username = `${body.last_name} ${body.first_name}`;
+        resolve(username);
+    } else {
+        console.error("unable to send message:" + err);
+        reject(err);
+    }
+});
+    return username
+    })
+
+}
 
 let handleGetStarted = (sender_psid) => {
     return new Promise(async (resolve, reject) => {
         try{
-            let response = {"text": "OK. Xin chào bạn ABC đến với nhà hàng của Bli"}
+            let username = await getUserName(sender_psid);
+            let response = {"text": `OK. Xin chào bạn ${username} đến với nhà hàng của Bli`}
             await callSendAPI(sender_psid, response);
             resolve('done');
         }catch(e){
