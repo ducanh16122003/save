@@ -129,16 +129,12 @@ async function handlePostback(sender_psid, received_postback){
             break;
         case 'GET_STARTED':
             await chatbotService.handleGetStarted(sender_psid);
-        
-            
-            
-            await callSendAPI(sender_psid, response);
             break;
         default:
             response = {"text": `Oops! I don't know how to respond to postback ${payload}.`}
     }
     //Send the message to acknowledge the postback
-    callSendAPI(sender_psid, response);
+    //callSendAPI(sender_psid, response);
 }
 
 //Sends response messages via the Send API
