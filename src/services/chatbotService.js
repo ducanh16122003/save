@@ -30,19 +30,18 @@ request({
 
 let getUserName = (sender_psid) => {
     return new Promise((resolve, reject) => {
-request({
-    "uri": `https://graph.facebook.com/${sender_psid}?fields=first_name,last_name,profile_pic&access_token=${page_access_token}`,
-    "qs" : { "access_token": page_access_token },
-    "method": "GET",
-},(err, res, body) => {
-    if (!err) {
-        body = JSON.parse(body);
-        let username = `${body.last_name} ${body.first_name}`;
-        resolve(username);
-    } else {
-        console.error("unable to send message:" + err);
-        reject(err);
-    }
+        request({
+            "uri": `https://graph.facebook.com/${sender_psid}?fields=first_name,last_name,profile_pic&access_token=${page_access_token}`,
+            "method": "GET",
+    },(err, res, body) => {
+        if (!err) {
+            body = JSON.parse(body);
+            let username = `${body.last_name} ${body.first_name}`;
+            resolve(username);
+        } else {
+            console.error("unable to send message:" + err);
+            reject(err);
+        }
         });
     })
 }
@@ -54,7 +53,7 @@ let handleGetStarted = (sender_psid) => {
             let response = {"text": `OK. Xin chào bạn ${username} đến với nhà hàng của Bli`}
             await callSendAPI(sender_psid, response);
             resolve('done');
-        }catch(e){
+        } catch(e){
             reject(e);
         }
     })
