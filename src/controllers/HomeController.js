@@ -127,9 +127,13 @@ async function handlePostback(sender_psid, received_postback){
         case 'no':
             response = {"text": `Oops, try sending another image.`}
             break;
-        case 'GET_STARTED':
-            await chatbotService.handleGetStarted(sender_psid);
-            break;
+            case 'GET_STARTED':
+                await chatbotService.handleGetStarted(sender_psid).then(() => {
+                    console.log("✅ Đã xử lý GET_STARTED thành công!");
+                }).catch(err => {
+                    console.error("❌ Lỗi khi xử lý GET_STARTED:", err);
+                });
+                break;
         default:
             response = {"text": `Oops! I don't know how to respond to postback ${payload}.`}
     }
