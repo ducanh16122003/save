@@ -129,6 +129,8 @@ async function handlePostback(sender_psid, received_postback){
             break;
         case 'GET_STARTED':
             response = {"text": `Welcome to my nhà hàng!`}
+            
+            await chatbotService.handleGetStarted(sender_psid);
             await callSendAPI(sender_psid, response);
             break;
         default:
@@ -163,6 +165,7 @@ request({
     }
 })
 }
+
 
 let setupProfile = async (req, res) =>{
     //call profile facebook api
