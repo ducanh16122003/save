@@ -195,5 +195,4 @@ module.exports = {
     postWebhook: postWebhook,
     getWebhook: getWebhook,
     setupProfile: setupProfile,
-    handleGetStarted: handleGetStarted,
 }
