@@ -175,6 +175,7 @@ let sendgetStartedtemplate = () => {
             }
         }
     }
+    return response;
     }
 //Sends response messages via the Send API
 function callSendAPI(sender_psid, response){
