@@ -4,6 +4,7 @@ require('dotenv').config();
 
 const page_access_token = process.env.PAGE_ACCESS_TOKEN;
 
+const IMAGE_GET_STARTED = "https://s.pro.vn/k7Mu";
 //process.env.NAME_VARIABLES
 let getHomePage = (req, res) => {
     return res.render('homepage.ejs');
@@ -128,9 +129,12 @@ async function handlePostback(sender_psid, received_postback){
             response = {"text": `Oops, try sending another image.`}
             break;
         case 'GET_STARTED':
-            let response1 = {"text": `Chào mừng bạn đến với nhà hàng của Bli.`}
-            let response2 = {"text": `Ở đây có rất nhiều món ăn khác nhau như thịt, cá,....`}
+            let response2 = {"text": `Chào mừng bạn đến với nhà hàng của Bli.`}
+
+            let response1 = sendgetStartedtemplate();
+
             await callSendAPI(sender_psid, response1);
+
             await callSendAPI(sender_psid, response2); 
             break;
         default:
@@ -140,6 +144,38 @@ async function handlePostback(sender_psid, received_postback){
     callSendAPI(sender_psid, response);
 }
 
+let sendgetStartedtemplate = () => {
+    let response = {
+        "attachment": {
+            "type": "template",
+            "payload": {
+                "template_type": "generic",
+                "elements": [{
+                    "title": "Xin chào bạn đến với nhà hàng của Bli",
+                    "subtitle": "Dưới đây là các lựa chọn của nhà hàng",
+                    "image_url": IMAGE_GET_STARTED,
+                    "buttons": [
+                        {
+                            "type": "postback",
+                            "title": "MENU CHÍNH",
+                            "payload": "MAIN_MENU",
+                        },
+                        {
+                            "type": "postback",
+                            "title": "ĐẶT BÀN",
+                            "payload": "RESERVE_TABLE",
+                        },
+                        {
+                            "type": "postback",
+                            "title": "HƯỚNG DẪN SỬ DỤNG BOT",
+                            "payload": "GUIDE",
+                        }
+                    ],
+                }]
+            }
+        }
+    }
+    }
 //Sends response messages via the Send API
 function callSendAPI(sender_psid, response){
     //Construct the message body
