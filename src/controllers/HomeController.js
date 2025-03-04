@@ -233,6 +233,51 @@ await request({
 let setupPersistentMenu = async (req, res) =>{
     //call profile facebook api
     //Construct the message body
+let request_body = {
+        "persistent_menu": [
+              {
+                  "locale": "default",
+                  "composer_input_disabled": false,
+                  "call_to_actions": [
+                      {
+                          "type": "web_url",
+                          "title": "Youtube channel",
+                          "url": "https://www.youtube.com/@ucanhnguyen5202",
+                          "payload": "VIEW_YOUTUBE_CHANNEL"
+                      },
+                      {
+                          "type": "web_url",
+                          "title": "Facebook page bli food",
+                          "url": "https://www.facebook.com/profile.php?id=61572421920351",
+                          "webview_height_ratio": "full"
+                      },
+                      {
+                          "type": "postback",
+                          "title": "khởi đông lại bot",
+                          "payload": "RESTART_BOT"
+                          
+                      }
+                  ]
+              }
+          ]
+      }
+
+//template string
+//Send the HTTP request to the Messenger Platform
+await request({
+    "uri": `https://graph.facebook.com/v21.0/me/messenger_profile?access_token=${page_access_token}`,
+    "qs" : { "access_token": page_access_token },
+    "method": "POST",
+    "json": request_body
+},(err, res, body) => {
+    console.log(body)
+    if (!err) {
+        console.log('Setup persistent menu succeeds!')
+    } else {
+        console.error("unable to Setup user profile:" + err);
+    }
+});
+    return res.send("Setup persistent menu succeeds!");
 }
 
 module.exports = {
