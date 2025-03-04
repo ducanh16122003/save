@@ -229,9 +229,16 @@ await request({
 });
     return res.send("Setup user profile succeeds!");
 }
+
+let setupPersistentMenu = async (req, res) =>{
+    //call profile facebook api
+    //Construct the message body
+}
+
 module.exports = {
     getHomePage: getHomePage,
     postWebhook: postWebhook,
     getWebhook: getWebhook,
     setupProfile: setupProfile,
+    setupPersistentMenu: setupPersistentMenu,
 }
