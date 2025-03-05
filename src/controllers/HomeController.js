@@ -140,7 +140,8 @@ async function handlePostback(sender_psid, received_postback){
             await callSendAPI(sender_psid, response2); 
             break;
         case 'MAIN_MENU':
-            let response = handleSendMainMenus(sender_psid);
+            let response = handleSendMainMenus();
+            await callSendAPI(sender_psid, response);
             break;
         default:
             response = {"text": `Oops! I don't know how to respond to postback ${payload}.`}
