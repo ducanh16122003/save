@@ -139,6 +139,9 @@ async function handlePostback(sender_psid, received_postback){
 
             await callSendAPI(sender_psid, response2); 
             break;
+        case 'MAIN_MENU':
+            let response = handleSendMainMenus(sender_psid);
+            break;
         default:
             response = {"text": `Oops! I don't know how to respond to postback ${payload}.`}
     }
@@ -179,6 +182,60 @@ let sendgetStartedtemplate = () => {
     }
     return response;
     }
+
+let handleSendMainMenus = () => {
+    let response = {
+        "attachment": {
+            "type": "template",
+            "payload": {
+                "template_type": "generic",
+                "elements": [
+                    {
+                    "title": "Menu của nhà hàng",
+                    "subtitle": "Chúng tôi hân hạnh mang đến cho bạn thực đơn phong phú cho bữa trưa và bữa tối",
+                    "image_url": IMAGE_GET_STARTED,
+                    "buttons": [
+                        {
+                            "type": "postback",
+                            "title": "BỮA TRƯA",
+                            "payload": "LUNCH_MENU",
+                        },
+                        {
+                            "type": "postback",
+                            "title": "BỮA TỐI",
+                            "payload": "DINNER_MENU",
+                        },
+                    ],
+                },
+                {
+                    "title": "Giờ mở cửa",
+                    "subtitle": "Thứ 2 - Thứ 6: 10AM - 11PM | Thứ 7: 5PM - 10PM | Chủ nhật: 5PM - 9PM",
+                    "image_url": IMAGE_GET_STARTED,
+                    "buttons": [
+                        {
+                            "type": "postback",
+                            "title": "ĐẶT BÀN",
+                            "payload": "RESERVE_TABLE",
+                        },
+                    ],
+                },
+                {
+                    "title": "Không gian nhà hàng",
+                    "subtitle": "Nhà hàng có sức chưa lên đến 300 khách ngồi, phù hợp cho các buổi tiệc lớn",
+                    "image_url": IMAGE_GET_STARTED,
+                    "buttons": [
+                        {
+                            "type": "postback",
+                            "title": "CHI TIẾT KHÔNG GIAN",
+                            "payload": "SHOW_ROOMS",
+                        },
+                    ],
+                }]
+            }
+        }
+    }
+    return response;
+}
 //Sends response messages via the Send API
 function callSendAPI(sender_psid, response){
     //Construct the message body
