@@ -5,8 +5,8 @@ require('dotenv').config();
 const page_access_token = process.env.PAGE_ACCESS_TOKEN;
 
 const IMAGE_GET_STARTED = "https://s.pro.vn/k7Mu";
-const IMAGE_MAIN_MENU_1 = "https://s.pro.vn/ge78";
-const IMAGE_MAIN_MENU_2 = "https://s.pro.vn/ge78";
+const IMAGE_MAIN_MENU_1 = "https://short.com.vn/HvjT";
+const IMAGE_MAIN_MENU_2 = "https://short.com.vn/lo3A";
 const IMAGE_MAIN_MENU_3 = "https://s.pro.vn/ge78";
 //process.env.NAME_VARIABLES
 let getHomePage = (req, res) => {
