@@ -9,9 +9,9 @@ const IMAGE_MAIN_MENU_1 = "https://short.com.vn/HvjT";
 const IMAGE_MAIN_MENU_2 = "https://short.com.vn/lo3A";
 const IMAGE_MAIN_MENU_3 = "https://s.pro.vn/ge78";
 
-const IMAGE_VIEW_APPETIZERS = "https://short.com.vn/lo3A";
-const IMAGE_VIEW_FISH = "https://short.com.vn/lo3A";
-const IMAGE_VIEW_MEAT = "https://short.com.vn/lo3A";
+const IMAGE_VIEW_APPETIZERS = "https://s.pro.vn/UMQM";
+const IMAGE_VIEW_FISH = "https://short.com.vn/XqDR";
+const IMAGE_VIEW_MEAT = "https://s.pro.vn/mYYN";
 //process.env.NAME_VARIABLES
 let getHomePage = (req, res) => {
     return res.render('homepage.ejs');
@@ -270,7 +270,7 @@ let getlunchmenutemplate = () => {
                     {
                     "title": "Món tráng miệng",
                     "subtitle": "Nhà hàng có nhiều món tráng miệng cực kỳ hấp dẫn",
-                    "image_url": IMAGE_MAIN_MENU_1,
+                    "image_url": IMAGE_VIEW_APPETIZERS,
                     "buttons": [
                         {   
                             //Appetizers
@@ -283,7 +283,7 @@ let getlunchmenutemplate = () => {
                 {
                     "title": "Cá bảy màu",
                     "subtitle": "Cá nước mặn và cá nước ngọt",
-                    "image_url": IMAGE_MAIN_MENU_2,
+                    "image_url": IMAGE_VIEW_FISH,
                     "buttons": [
                         {
                             "type": "postback",
@@ -295,7 +295,7 @@ let getlunchmenutemplate = () => {
                 {
                     "title": "Thịt hun khói",
                     "subtitle": "Đảm bảo chất lượng hàng đầu",
-                    "image_url": IMAGE_MAIN_MENU_3,
+                    "image_url": IMAGE_VIEW_MEAT,
                     "buttons": [
                         {
                             "type": "postback",
@@ -320,7 +320,7 @@ let getdinnermenutemplate = () => {
                     {
                     "title": "Món tráng miệng",
                     "subtitle": "Nhà hàng có nhiều món tráng miệng cực kỳ hấp dẫn",
-                    "image_url": IMAGE_MAIN_MENU_1,
+                    "image_url": IMAGE_VIEW_APPETIZERS,
                     "buttons": [
                         {   
                             //Appetizers
@@ -333,7 +333,7 @@ let getdinnermenutemplate = () => {
                 {
                     "title": "Cá bảy màu",
                     "subtitle": "Cá nước mặn và cá nước ngọt",
-                    "image_url": IMAGE_MAIN_MENU_2,
+                    "image_url": IMAGE_VIEW_FISH,
                     "buttons": [
                         {
                             "type": "postback",
@@ -345,7 +345,7 @@ let getdinnermenutemplate = () => {
                 {
                     "title": "Thịt hun khói",
                     "subtitle": "Đảm bảo chất lượng hàng đầu",
-                    "image_url": IMAGE_MAIN_MENU_3,
+                    "image_url": IMAGE_VIEW_MEAT,
                     "buttons": [
                         {
                             "type": "postback",
