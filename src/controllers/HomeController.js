@@ -5,6 +5,9 @@ require('dotenv').config();
 const page_access_token = process.env.PAGE_ACCESS_TOKEN;
 
 const IMAGE_GET_STARTED = "https://s.pro.vn/k7Mu";
+const IMAGE_MAIN_MENU_1 = "https://s.pro.vn/ge78";
+const IMAGE_MAIN_MENU_2 = "https://s.pro.vn/ge78";
+const IMAGE_MAIN_MENU_3 = "https://s.pro.vn/ge78";
 //process.env.NAME_VARIABLES
 let getHomePage = (req, res) => {
     return res.render('homepage.ejs');
@@ -194,7 +197,7 @@ let handleSendMainMenus = () => {
                     {
                     "title": "Menu của nhà hàng",
                     "subtitle": "Chúng tôi hân hạnh mang đến cho bạn thực đơn phong phú cho bữa trưa và bữa tối",
-                    "image_url": IMAGE_GET_STARTED,
+                    "image_url": IMAGE_MAIN_MENU_1,
                     "buttons": [
                         {
                             "type": "postback",
@@ -211,7 +214,7 @@ let handleSendMainMenus = () => {
                 {
                     "title": "Giờ mở cửa",
                     "subtitle": "Thứ 2 - Thứ 6: 10AM - 11PM | Thứ 7: 5PM - 10PM | Chủ nhật: 5PM - 9PM",
-                    "image_url": IMAGE_GET_STARTED,
+                    "image_url": IMAGE_MAIN_MENU_2,
                     "buttons": [
                         {
                             "type": "postback",
@@ -223,7 +226,7 @@ let handleSendMainMenus = () => {
                 {
                     "title": "Không gian nhà hàng",
                     "subtitle": "Nhà hàng có sức chưa lên đến 300 khách ngồi, phù hợp cho các buổi tiệc lớn",
-                    "image_url": IMAGE_GET_STARTED,
+                    "image_url": IMAGE_MAIN_MENU_3,
                     "buttons": [
                         {
                             "type": "postback",
