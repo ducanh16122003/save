@@ -8,6 +8,10 @@ const IMAGE_GET_STARTED = "https://s.pro.vn/k7Mu";
 const IMAGE_MAIN_MENU_1 = "https://short.com.vn/HvjT";
 const IMAGE_MAIN_MENU_2 = "https://short.com.vn/lo3A";
 const IMAGE_MAIN_MENU_3 = "https://s.pro.vn/ge78";
+
+const IMAGE_VIEW_APPETIZERS = "https://short.com.vn/lo3A";
+const IMAGE_VIEW_FISH = "https://short.com.vn/lo3A";
+const IMAGE_VIEW_MEAT = "https://short.com.vn/lo3A";
 //process.env.NAME_VARIABLES
 let getHomePage = (req, res) => {
     return res.render('homepage.ejs');
@@ -136,16 +140,31 @@ async function handlePostback(sender_psid, received_postback){
         case 'GET_STARTED':
             let response2 = {"text": `Chào mừng bạn đến với nhà hàng của Bli.`}
 
-            let response1 = sendgetStartedtemplate();
+            let response1 = sendgetStartedtemplate(sender_psid);
 
             await callSendAPI(sender_psid, response1);
 
             await callSendAPI(sender_psid, response2); 
             break;
         case 'MAIN_MENU':
-            let response = handleSendMainMenus();
+            let response = handleSendMainMenus(sender_psid);
             await callSendAPI(sender_psid, response);
             break;
+
+        case 'LUNCH_MENU':
+            let response3 = getlunchmenutemplate(sender_psid);
+            await callSendAPI(sender_psid, response3);
+            break;
+
+        case 'DINNER_MENU':
+            let response4 = getdinnermenutemplate(sender_psid);
+            await callSendAPI(sender_psid, response4);
+            break;
+        
+        case 'VIEW_APPETIZERS':
+        case 'VIEW_FISH':
+        case 'VIEW_MEAT':
+        
         default:
             response = {"text": `Oops! I don't know how to respond to postback ${payload}.`}
     }
@@ -240,6 +259,107 @@ let handleSendMainMenus = () => {
     }
     return response;
 }
+
+let getlunchmenutemplate = () => {
+    let response = {
+        "attachment": {
+            "type": "template",
+            "payload": {
+                "template_type": "generic",
+                "elements": [
+                    {
+                    "title": "Món tráng miệng",
+                    "subtitle": "Nhà hàng có nhiều món tráng miệng cực kỳ hấp dẫn",
+                    "image_url": IMAGE_MAIN_MENU_1,
+                    "buttons": [
+                        {   
+                            //Appetizers
+                            "type": "postback",
+                            "title": "XEM CHI TIẾT",
+                            "payload": "VIEW_APPETIZERS",
+                        },
+                    ],
+                },
+                {
+                    "title": "Cá bảy màu",
+                    "subtitle": "Cá nước mặn và cá nước ngọt",
+                    "image_url": IMAGE_MAIN_MENU_2,
+                    "buttons": [
+                        {
+                            "type": "postback",
+                            "title": "XEM CHI TIẾT",
+                            "payload": "VIEW_FISH",
+                        },
+                    ],
+                },
+                {
+                    "title": "Thịt hun khói",
+                    "subtitle": "Đảm bảo chất lượng hàng đầu",
+                    "image_url": IMAGE_MAIN_MENU_3,
+                    "buttons": [
+                        {
+                            "type": "postback",
+                            "title": "XEM CHI TIẾT",
+                            "payload": "VIEW_MEAT",
+                        },
+                    ],
+                }]
+            }
+        }
+    }
+    return response;
+}
+
+let getdinnermenutemplate = () => {
+    let response = {
+        "attachment": {
+            "type": "template",
+            "payload": {
+                "template_type": "generic",
+                "elements": [
+                    {
+                    "title": "Món tráng miệng",
+                    "subtitle": "Nhà hàng có nhiều món tráng miệng cực kỳ hấp dẫn",
+                    "image_url": IMAGE_MAIN_MENU_1,
+                    "buttons": [
+                        {   
+                            //Appetizers
+                            "type": "postback",
+                            "title": "XEM CHI TIẾT",
+                            "payload": "VIEW_APPETIZERS",
+                        },
+                    ],
+                },
+                {
+                    "title": "Cá bảy màu",
+                    "subtitle": "Cá nước mặn và cá nước ngọt",
+                    "image_url": IMAGE_MAIN_MENU_2,
+                    "buttons": [
+                        {
+                            "type": "postback",
+                            "title": "XEM CHI TIẾT",
+                            "payload": "VIEW_FISH",
+                        },
+                    ],
+                },
+                {
+                    "title": "Thịt hun khói",
+                    "subtitle": "Đảm bảo chất lượng hàng đầu",
+                    "image_url": IMAGE_MAIN_MENU_3,
+                    "buttons": [
+                        {
+                            "type": "postback",
+                            "title": "XEM CHI TIẾT",
+                            "payload": "VIEW_MEAT",
+                        },
+                    ],
+                }]
+            }
+        }
+    }
+    return response;
+}
+
 //Sends response messages via the Send API
 function callSendAPI(sender_psid, response){
     //Construct the message body
@@ -265,7 +385,6 @@ request({
     }
 })
 }
-
 
 let setupProfile = async (req, res) =>{
     //call profile facebook api
