@@ -17,7 +17,7 @@ const mysql = require("mysql");
 
 // Kết nối MySQL
 const db = mysql.createConnection({
-    host: "0.0.0.0",
+    host: "localhost",
     user: "root",
     password: "",
     database: "qlbandat",
@@ -95,6 +95,6 @@ app.get("/", (req, res) => {
 // Chạy server
 let port = process.env.PORT || 8080;
 
-app.listen(port, '0,0,0,0', () => {
-    console.log("App is running at the port: " + port);
-})
+app.listen(3000, '0.0.0.0', () => {
+    console.log('Server is running on port 3000');
+});
