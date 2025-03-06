@@ -3,12 +3,14 @@ import bodyParser from "body-parser";
 import viewEngine from "./configs/viewEngine.js";
 import webRoutes from "./routes/web";
 
+
 const mysql = require("mysql");
 
 let app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true}));
+app.use(express.static("public"));
 //config view Engine
 viewEngine(app);
 
