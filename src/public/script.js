@@ -3,7 +3,7 @@ const API_URL = "http://localhost:8080";
 // Lấy danh sách bàn
 async function fetchTables() {
     try {
-        const response = await fetch("/tables"); // Gọi API từ server.js
+        const response = await fetch(`${API_URL}/tables`);
         const tables = await response.json();
         renderTables(tables);
     } catch (error) {
