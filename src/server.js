@@ -21,7 +21,7 @@ const db = mysql.createConnection({
     host: "localhost",
     user: "root",
     password: "",
-    database: "restaurant_db"
+    database: "qlbandat"
 });
 
 db.connect(err => {
