@@ -17,7 +17,7 @@ const mysql = require("mysql");
 
 // Kết nối MySQL
 const db = mysql.createConnection({
-    host: "localhost",
+    host: "0.0.0.0",
     user: "root",
     password: "",
     database: "qlbandat",
