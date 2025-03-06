@@ -18,3 +18,16 @@ let port = process.env.PORT || 8080;
 app.listen(port,() => {
     console.log("App is running at the port: " + port);
 })
+
+// Kết nối MySQL
+const db = mysql.createConnection({
+    host: "localhost",
+    user: "root",
+    password: "",
+    database: "restaurant_db"
+});
+
+db.connect(err => {
+    if (err) throw err;
+    console.log("MySQL Connected...");
+});
