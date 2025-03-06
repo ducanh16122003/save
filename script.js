@@ -39,6 +39,36 @@ async function toggleStatus(id, currentStatus) {
     fetchTables(); // Cập nhật lại danh sách
 }
 
+//Thêm hoặc sửa bàn
+document.getElementById("table-form").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    
+    const id = document.getElementById("table-id").value;
+    const name = document.getElementById("table-name").value;
+    const capacity = document.getElementById("table-capacity").value;
+    const position = document.getElementById("table-position").value;
+    const status = document.getElementById("table-status").value;
+
+    const tableData = { name, capacity, position, status };
+
+    if (id) {
+        await fetch(`/update_table/${id}`, {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(tableData)
+        });
+    } else {
+        await fetch("/add_table", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(tableData)
+        });
+    }
+
+    fetchTables();
+    document.getElementById("table-form").reset();
+});
+
 // Xóa bàn
 async function deleteTable(id) {
     if (confirm("Bạn có chắc muốn xóa bàn này?")) {
