@@ -2,9 +2,13 @@ const API_URL = "http://localhost:8080";
 
 // Lấy danh sách bàn
 async function fetchTables() {
-    const response = await fetch(`${API_URL}/tables`);
-    const tables = await response.json();
-    renderTables(tables);
+    try {
+        const response = await fetch("/tables"); // Gọi API từ server.js
+        const tables = await response.json();
+        renderTables(tables);
+    } catch (error) {
+        console.error("Lỗi khi tải danh sách bàn:", error);
+    }
 }
 
 // Hiển thị danh sách bàn
