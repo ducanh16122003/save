@@ -20,7 +20,8 @@ const db = mysql.createConnection({
     host: "localhost",
     user: "root",
     password: "",
-    database: "qlbandat"
+    database: "qlbandat",
+    port: 10000
 });
 
 db.connect(err => {
