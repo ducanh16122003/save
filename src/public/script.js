@@ -5,6 +5,7 @@ async function fetchTables() {
     try {
         const response = await fetch(`${API_URL}/tables`);
         const tables = await response.json();
+        console.log("Dữ liệu từ API:", tables); // 👈 Xem dữ liệu có nhận được không
         renderTables(tables);
     } catch (error) {
         console.error("Lỗi khi tải danh sách bàn:", error);
@@ -28,6 +29,7 @@ function renderTables(tables) {
                 <button onclick="deleteTable(${table.id})">Xóa</button>
             </td>
         `;
+        console.log(row.innerHTML); // 👈 Kiểm tra HTML
         tableList.appendChild(row);
     });
 }

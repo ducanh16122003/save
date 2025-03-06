@@ -31,11 +31,16 @@ db.connect(err => {
 
 // API lấy danh sách bàn
 app.get("/tables", (req, res) => {
-    db.query("SELECT * FROM tables", (err, result) => {
-        if (err) throw err;
-        res.json(result);
+    db.query("SELECT * FROM tables", (err, results) => {
+        if (err) {
+            console.error("Lỗi truy vấn:", err);
+            res.status(500).send("Lỗi Server");
+        } else {
+            res.json(results);
+        }
     });
 });
+
 
 // API cập nhật trạng thái bàn
 app.post("/update_table/:id", (req, res) => {
