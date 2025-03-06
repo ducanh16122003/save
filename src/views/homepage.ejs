@@ -33,32 +33,207 @@
         </style>
     </head>
     <body>
-        <h2>Thêm/Sửa Bàn</h2>
+    <h2>Danh sách bàn</h2>
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>Tên bàn</th>
+            <th>Sức chứa</th>
+            <th>Vị trí</th>
+            <th>Trạng thái</th>
+        </tr>
+        <tbody id="table-list"></tbody>
+    </table>
+    
+    <h2>Thêm bàn</h2>
     <form id="table-form">
-    <input type="hidden" id="table-id">
-    <input type="text" id="table-name" placeholder="Tên bàn" required>
-    <input type="number" id="table-capacity" placeholder="Sức chứa" required>
-    <input type="text" id="table-position" placeholder="Vị trí" required>
-    <select id="table-status">
-        <option value="Available">Còn chỗ</option>
-        <option value="Occupied">Hết chỗ</option>
-    </select>
-    <button type="submit">Lưu</button>
+        <input type="hidden" id="table-id">
+        <label>Tên bàn:</label>
+        <input type="text" id="name">
+        <label>Sức chứa:</label>
+        <input type="number" id="capacity">
+        <label>Vị trí:</label>
+        <input type="text" id="position">
+        <label>Trạng thái:</label>
+        <select id="status">
+            <option value="Available">Available</option>
+            <option value="Occupied">Occupied</option>
+        </select>
+        <button type="button" onclick="saveTable()">Lưu</button>
+        <button type="reset">Nhập lại</button>
     </form>
-        <h2>Danh sách bàn</h2>
-        <table>
-            <tr>
-                <th>ID</th>
-                <th>Tên bàn</th>
-                <th>Sức chứa</th>
-                <th>Vị trí</th>
-                <th>Trạng thái</th>
-            </tr>
-            <tbody id="table-list"></tbody>
-        </table>
+        
+    <script src="/js/script.js"></script>
+
+    <script>
+// 🟢 HÀM TẢI DANH SÁCH BÀN
+function loadTables() {
+    fetch("/tables") // Gọi API lấy danh sách bàn
+        .then(response => response.json())
+        .then(data => {
+            console.log("Dữ liệu từ server:", data); // Kiểm tra dữ liệu từ server
+            const tableBody = document.getElementById("table-list");
+            tableBody.innerHTML = ""; // Xóa dữ liệu cũ (nếu có)
+
+            data.forEach(table => {
+                const row = `
+                    <tr>
+                        <td>${table.id}</td>
+                        <td>${table.name}</td>
+                        <td>${table.capacity}</td>
+                        <td>${table.position}</td>
+                        <td>${table.status}</td>
+                        <td>
+                            <button onclick="editTable(${table.id}, '${table.name}', ${table.capacity}, '${table.position}', '${table.status}')">Sửa</button>
+                            <button onclick="deleteTable(${table.id})">Xóa</button>
+                        </td>
+                    </tr>
+                `;
+                tableBody.innerHTML += row;
+            });
+        })
+        .catch(error => console.error("Lỗi khi lấy dữ liệu:", error));
+}
+
+// 🟡 HÀM THÊM HOẶC CẬP NHẬT BÀN
+function saveTable() {
+    const id = document.getElementById("table-id").value.trim();
+    const name = document.getElementById("name").value;
+    const capacity = document.getElementById("capacity").value;
+    const position = document.getElementById("position").value;
+    const status = document.getElementById("status").value;
+
+    const tableData = { name, capacity, position, status };
+
+    if (id) {
+        // 🔄 Cập nhật bàn (có ID)
+        fetch(`/tables/${id}`, {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(tableData)
+        })
+        .then(response => response.json())
+        .then(() => {
+            console.log("Bàn đã được cập nhật:", id);
+            resetForm();
+            loadTables();
+        })
+        .catch(error => console.error("Lỗi khi cập nhật bàn:", error));
+    } else {
+        // ➕ Thêm bàn mới (không có ID)
+        fetch("/tables", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(tableData)
+        })
+        .then(response => response.json())
+        .then(() => {
+            console.log("Bàn mới đã được thêm!");
+            resetForm();
+            loadTables();
+        })
+        .catch(error => console.error("Lỗi khi thêm bàn:", error));
+    }
+}
+
+// 🟠 HÀM CHỈNH SỬA BÀN
+function editTable(id, name, capacity, position, status) {
+    document.getElementById("table-id").value = id; // Lưu ID bàn cần sửa
+    document.getElementById("name").value = name;
+    document.getElementById("capacity").value = capacity;
+    document.getElementById("position").value = position;
+    document.getElementById("status").value = status;
+}
+
+// 🔴 HÀM XÓA BÀN
+function deleteTable(id) {
+    if (confirm("Bạn có chắc chắn muốn xóa bàn này?")) {
+        fetch(`/tables/${id}`, {
+            method: "DELETE"
+        })
+        .then(response => response.json())
+        .then(() => {
+            console.log("Bàn đã được xóa:", id);
+            loadTables();
+        })
+        .catch(error => console.error("Lỗi khi xóa bàn:", error));
+    }
+}
+
+// 🟣 HÀM RESET FORM SAU KHI LƯU
+function resetForm() {
+    document.getElementById("table-id").value = "";
+    document.getElementById("name").value = "";
+    document.getElementById("capacity").value = "";
+    document.getElementById("position").value = "";
+    document.getElementById("status").value = "Available";
+}
+
+            </script>
     </body>
     </html>
+
+    <h2>Sơ đồ bàn ăn</h2>
+    <div id="restaurant-layout">
+        <div id="table-map"></div>
+    </div>    
+<script>
+fetch("/tables")
+    .then(response => response.json())
+    .then(data => {
+        const tableList = document.getElementById("table-list");
+        const tableMap = document.getElementById("table-map");
+
+        data.forEach(table => {
+            // Hiển thị trong bảng danh sách
+            let row = document.createElement("tr");
+            row.innerHTML = `
+                <td>${table.id}</td>
+                <td>${table.name}</td>
+                <td>${table.capacity}</td>
+                <td>${table.position}</td>
+                <td>${table.status}</td>
+            `;
+            tableList.appendChild(row);
+
+            // Hiển thị sơ đồ bàn
+            let tableDiv = document.createElement("div");
+            tableDiv.classList.add("table-item");
+            if (table.status === "Occupied") {
+                tableDiv.classList.add("occupied");
+            }
+            tableDiv.innerText = table.name;
+            tableMap.appendChild(tableDiv);
+        });
+    })
+    .catch(error => console.error("Lỗi khi tải danh sách bàn:", error));
+</script>
+
+<script>
+    document.getElementById("table-form").addEventListener("submit", function (event) {
+        event.preventDefault(); // Ngăn trang reload
     
+        const name = document.getElementById("name").value;
+        const capacity = document.getElementById("capacity").value;
+        const position = document.getElementById("position").value;
+        const status = document.getElementById("status").value;
+    
+        const data = { name, capacity, position, status };
+    
+        fetch("/tables", {
+            method: "POST", // Hoặc "PUT" nếu sửa
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data)
+        })
+        .then(response => response.json())
+        .then(result => {
+            console.log("Kết quả:", result);
+            alert(result.message);
+            location.reload(); // Load lại trang để cập nhật danh sách bàn
+        })
+        .catch(error => console.error("Lỗi:", error));
+    });
+    </script>
 
     <!-- Load Facebook SDK for JavaScript -->
     <div id="fb-root"></div>
