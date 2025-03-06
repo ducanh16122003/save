@@ -18,35 +18,32 @@
         <button type="submit">Setup persistent menu</button>
     </form>
 
-    <!DOCTYPE html>
-    <html lang="vi">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Quản lý bàn</title>
-        <script defer src="/script.js"></script>
-        <style>
-            table { width: 100%; border-collapse: collapse; }
-            th, td { padding: 10px; border: 1px solid black; text-align: center; }
-            .available { background-color: lightgreen; }
-            .occupied { background-color: lightcoral; }
-        </style>
-    </head>
-    <body>
-        <h2>Danh sách bàn</h2>
-        <table>
-            <tr>
-                <th>ID</th>
-                <th>Tên bàn</th>
-                <th>Sức chứa</th>
-                <th>Vị trí</th>
-                <th>Trạng thái</th>
-                <th>Hành động</th>
-            </tr>
-            <tbody id="table-list"></tbody>
-        </table>
-    </body>
-    </html>
+    <h2>Thêm/Sửa Bàn</h2>
+    <form id="table-form">
+    <input type="hidden" id="table-id">
+    <input type="text" id="table-name" placeholder="Tên bàn" required>
+    <input type="number" id="table-capacity" placeholder="Sức chứa" required>
+    <input type="text" id="table-position" placeholder="Vị trí" required>
+    <select id="table-status">
+        <option value="Available">Còn chỗ</option>
+        <option value="Occupied">Hết chỗ</option>
+    </select>
+    <button type="submit">Lưu</button>
+</form>
+
+<h2>Danh sách bàn</h2>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Tên bàn</th>
+        <th>Sức chứa</th>
+        <th>Vị trí</th>
+        <th>Trạng thái</th>
+        <th>Hành động</th>
+    </tr>
+    <tbody id="table-list"></tbody>
+</table>
+
     
 
     <!-- Load Facebook SDK for JavaScript -->

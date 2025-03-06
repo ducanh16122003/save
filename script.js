@@ -18,9 +18,9 @@ function renderTables(tables) {
             <td>${table.name}</td>
             <td>${table.capacity}</td>
             <td>${table.position}</td>
-            <td class="${table.status === 'Available' ? 'available' : 'occupied'}">${table.status}</td>
+            <td>${table.status}</td>
             <td>
-                <button onclick="toggleStatus(${table.id}, '${table.status}')">Đổi trạng thái</button>
+                <button onclick="editTable(${table.id}, '${table.name}', ${table.capacity}, '${table.position}', '${table.status}')">Sửa</button>
                 <button onclick="deleteTable(${table.id})">Xóa</button>
             </td>
         `;
