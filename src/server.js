@@ -95,6 +95,6 @@ app.get("/", (req, res) => {
 // Chạy server
 let port = process.env.PORT || 8080;
 
-app.listen(3000, '0.0.0.0', () => {
-    console.log('Server is running on port 3000');
-});
+app.listen(port,() => {
+    console.log("App is running at the port: " + port);
+})
