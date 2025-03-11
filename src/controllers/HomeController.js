@@ -13,7 +13,7 @@ const IMAGE_VIEW_APPETIZERS = "https://s.pro.vn/UMQM";
 const IMAGE_VIEW_FISH = "https://short.com.vn/XqDR";
 const IMAGE_VIEW_MEAT = "https://s.pro.vn/mYYN";
 
-const IMAGE_BACK_MAIN_MENU = "https://s.pro.vn/mYYN";
+const IMAGE_BACK_MAIN_MENU = "https://short.com.vn/JP78";
 //process.env.NAME_VARIABLES
 let getHomePage = (req, res) => {
     return res.render('homepage.ejs');
@@ -168,6 +168,8 @@ async function handlePostback(sender_psid, received_postback){
         case 'VIEW_MEAT':
         
         case 'BACK_TO_MAIN_MENU':
+            let response5 = handleSendMainMenus(sender_psid);
+            await callSendAPI(sender_psid, response5);
         default:
             response = {"text": `Oops! I don't know how to respond to postback ${payload}.`}
     }
