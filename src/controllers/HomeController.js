@@ -542,6 +542,7 @@ let getImageRoomTemplate = () => {
             }
         }
     }
+    return response;
 }
 
 let getButtonRoomTemplate = () => {
@@ -566,6 +567,7 @@ let getButtonRoomTemplate = () => {
             }
         }
     }
+    return response;
 }
 
 //Sends response messages via the Send API
