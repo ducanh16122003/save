@@ -198,8 +198,11 @@ async function handlePostback(sender_psid, received_postback){
 
         case "SHOW_ROOMS":
             let response9 = getImageRoomTemplate(sender_psid);
+
             let response10 = getButtonRoomTemplate(sender_psid);
+            
             await callSendAPI(sender_psid, response9);
+
             await callSendAPI(sender_psid, response10);
             break;
         default:
