@@ -14,6 +14,19 @@ const IMAGE_VIEW_FISH = "https://short.com.vn/XqDR";
 const IMAGE_VIEW_MEAT = "https://s.pro.vn/mYYN";
 
 const IMAGE_BACK_MAIN_MENU = "https://short.com.vn/JP78";
+
+const IMAGE_DETAIL_APPETIZERS_1 = "https://short.com.vn/JP78";
+const IMAGE_DETAIL_APPETIZERS_2 = "https://short.com.vn/JP78";
+const IMAGE_DETAIL_APPETIZERS_3 = "https://short.com.vn/JP78";
+
+const IMAGE_DETAIL_FISH_1 = "https://short.com.vn/JP78";
+const IMAGE_DETAIL_FISH_2 = "https://short.com.vn/JP78";
+const IMAGE_DETAIL_FISH_3 = "https://short.com.vn/JP78";
+
+const IMAGE_DETAIL_MEAT_1 = "https://short.com.vn/JP78";
+const IMAGE_DETAIL_MEAT_2 = "https://short.com.vn/JP78";
+const IMAGE_DETAIL_MEAT_3 = "https://short.com.vn/JP78";
+
 //process.env.NAME_VARIABLES
 let getHomePage = (req, res) => {
     return res.render('homepage.ejs');
@@ -164,8 +177,17 @@ async function handlePostback(sender_psid, received_postback){
             break;
         
         case 'VIEW_APPETIZERS':
+            let response6 = handleDetailViewAppetizer(sender_psid);
+            await callSendAPI(sender_psid, response6);
+            break;
         case 'VIEW_FISH':
+            let response7 = handleDetailViewFish(sender_psid);
+            await callSendAPI(sender_psid, response7);
+            break;
         case 'VIEW_MEAT':
+            let response8 = handleDetailViewMeat(sender_psid);
+            await callSendAPI(sender_psid, response8);
+            break;
         
         case 'BACK_TO_MAIN_MENU':
             let response5 = handleSendMainMenus(sender_psid);
@@ -372,6 +394,129 @@ let getdinnermenutemplate = () => {
                         },
                     ],
                 }]
+            }
+        }
+    }
+    return response;
+}
+
+let handleDetailViewAppetizer = () => {
+    let response = {
+        "attachment": {
+            "type": "template",
+            "payload": {
+                "template_type": "generic",
+                "elements": [
+                    {
+                    "title": "Dưa hấu",
+                    "subtitle": "50000 VND/1kg",
+                    "image_url": IMAGE_DETAIL_APPETIZERS_1,
+                },
+                {
+                    "title": "Xoài",
+                    "subtitle": "20000 VND/1kg",
+                    "image_url": IMAGE_DETAIL_APPETIZERS_2,
+                },
+                {
+                    "title": "Ổi",
+                    "subtitle": "30000 VND/1kg",
+                    "image_url": IMAGE_DETAIL_APPETIZERS_3,
+                },
+                {
+                    "title": "Quay trở lại",
+                    "subtitle": "Quay trở lại Menu chính",
+                    "image_url": IMAGE_BACK_MAIN_MENU,
+                    "buttons": [
+                        {
+                            "type": "postback",
+                            "title": "QUAY TRỞ LẠI",
+                            "payload": "BACK_TO_MAIN_MENU",
+                        },
+                    ],
+                },
+            ]
+            }
+        }
+    }
+    return response;
+}
+
+let handleDetailViewFish = () => {
+    let response = {
+        "attachment": {
+            "type": "template",
+            "payload": {
+                "template_type": "generic",
+                "elements": [
+                    {
+                    "title": "Cá hồi Canada",
+                    "subtitle": "150000 VND/1kg",
+                    "image_url": IMAGE_DETAIL_FISH_1,
+                },
+                {
+                    "title": "Cá chép ông địa",
+                    "subtitle": "200000 VND/1kg",
+                    "image_url": IMAGE_DETAIL_FISH_2,
+                },
+                {
+                    "title": "Cá Ngừ 900 Màu",
+                    "subtitle": "300000 VND/1kg",
+                    "image_url": IMAGE_DETAIL_FISH_3,
+                },
+                {
+                    "title": "Quay trở lại",
+                    "subtitle": "Quay trở lại Menu chính",
+                    "image_url": IMAGE_BACK_MAIN_MENU,
+                    "buttons": [
+                        {
+                            "type": "postback",
+                            "title": "QUAY TRỞ LẠI",
+                            "payload": "BACK_TO_MAIN_MENU",
+                        },
+                    ],
+                },
+            ]
+            }
+        }
+    }
+    return response;
+}
+
+let handleDetailViewMeat = () => {
+    let response = {
+        "attachment": {
+            "type": "template",
+            "payload": {
+                "template_type": "generic",
+                "elements": [
+                    {
+                    "title": "Thịt bò Mỹ",
+                    "subtitle": "500000 VND/1kg",
+                    "image_url": IMAGE_DETAIL_MEAT_1,
+                },
+                {
+                    "title": "Thịt heo",
+                    "subtitle": "200000 VND/1kg",
+                    "image_url": IMAGE_DETAIL_MEAT_2,
+                },
+                {
+                    "title": "Thịt trâu",
+                    "subtitle": "300000 VND/1kg",
+                    "image_url": IMAGE_DETAIL_MEAT_3,
+                },
+                {
+                    "title": "Quay trở lại",
+                    "subtitle": "Quay trở lại Menu chính",
+                    "image_url": IMAGE_BACK_MAIN_MENU,
+                    "buttons": [
+                        {
+                            "type": "postback",
+                            "title": "QUAY TRỞ LẠI",
+                            "payload": "BACK_TO_MAIN_MENU",
+                        },
+                    ],
+                },
+            ]
             }
         }
     }
