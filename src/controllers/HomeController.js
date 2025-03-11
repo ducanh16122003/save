@@ -200,7 +200,7 @@ async function handlePostback(sender_psid, received_postback){
             let response9 = getImageRoomTemplate(sender_psid);
 
             let response10 = getButtonRoomTemplate(sender_psid);
-            
+
             await callSendAPI(sender_psid, response9);
 
             await callSendAPI(sender_psid, response10);
@@ -538,7 +538,7 @@ let handleDetailViewMeat = () => {
 let getImageRoomTemplate = () => {
     let response = {
         "attachment": {
-            "type": "template",
+            "type": "image",
             "payload": {
                 "url": IMAGE_DETAIL_ROOMS,
                 "is_reusable": true
