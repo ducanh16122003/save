@@ -524,7 +524,7 @@ let handleDetailViewMeat = () => {
 }
 
 //Sends response messages via the Send API
-function callSendAPI(sender_psid, response){
+let callSendAPI = async (sender_psid, response) =>{
     //Construct the message body
 let request_body = {
     "recipient": {
@@ -532,6 +532,9 @@ let request_body = {
     },
     "message": response
 }
+
+await sendMarkReadMessage(sender_psid);
+await sendTypingOn(sender_psid);
 
 //Send the HTTP request to the Messenger Platform
 request({
@@ -545,6 +548,56 @@ request({
         console.log('message sent!')
     } else {
         console.error("unable to send message:" + err);
+    }
+})
+}
+
+let sendTypingOn = (sender_psid) => {
+    //Construct the message body
+let request_body = {
+    "recipient": {
+        "id": sender_psid
+    },
+    "sender_action": "typing_on"
+}
+
+//Send the HTTP request to the Messenger Platform
+request({
+    "uri": "https://graph.facebook.com/v21.0/me/messages",
+    "qs" : { "access_token": process.env.page_access_token },
+    "method": "POST",
+    "headers": { "Content-Type": "application/json" },
+    "json": request_body
+},(err, res, body) => {
+    if (!err) {
+        console.log('sendTypingOn sent!')
+    } else {
+        console.error("unable to send sendTypingOn:" + err);
+    }
+})
+}
+
+let sendMarkReadMessage = (sender_psid) => {
+    //Construct the message body
+let request_body = {
+    "recipient": {
+        "id": sender_psid
+    },
+    "sender_action": "mark_seen"
+}
+
+//Send the HTTP request to the Messenger Platform
+request({
+    "uri": "https://graph.facebook.com/v21.0/me/messages",
+    "qs" : { "access_token": process.env.page_access_token },
+    "method": "POST",
+    "headers": { "Content-Type": "application/json" },
+    "json": request_body
+},(err, res, body) => {
+    if (!err) {
+        console.log('sendTypingOn sent!')
+    } else {
+        console.error("unable to send sendTypingOn:" + err);
     }
 })
 }
