@@ -27,6 +27,8 @@ const IMAGE_DETAIL_MEAT_1 = "https://s.pro.vn/N1NW";
 const IMAGE_DETAIL_MEAT_2 = "https://s.pro.vn/zKlK";
 const IMAGE_DETAIL_MEAT_3 = "https://short.com.vn/pcKS";
 
+const IMAGE_DETAIL_ROOMS = "https://s.pro.vn/qCvb";
+
 //process.env.NAME_VARIABLES
 let getHomePage = (req, res) => {
     return res.render('homepage.ejs');
@@ -192,6 +194,14 @@ async function handlePostback(sender_psid, received_postback){
         case 'BACK_TO_MAIN_MENU':
             let response5 = handleSendMainMenus(sender_psid);
             await callSendAPI(sender_psid, response5);
+            break;
+
+        case "SHOW_ROOMS":
+            let response9 = getImageRoomTemplate(sender_psid);
+            let response10 = getButtonRoomTemplate(sender_psid);
+            await callSendAPI(sender_psid, response9);
+            await callSendAPI(sender_psid, response10);
+            break;
         default:
             response = {"text": `Oops! I don't know how to respond to postback ${payload}.`}
     }
@@ -521,6 +531,41 @@ let handleDetailViewMeat = () => {
         }
     }
     return response;
+}
+let getImageRoomTemplate = () => {
+    let response = {
+        "attachment": {
+            "type": "template",
+            "payload": {
+                "url": IMAGE_DETAIL_ROOMS,
+                "is_reusable": true
+            }
+        }
+    }
+}
+
+let getButtonRoomTemplate = () => {
+    let response = {
+        "attachment": {
+            "type": "template",
+            "payload": {
+                "template_type": "button",
+                "text": "Nhà hàng có thể phục vụ tối đa 300 khách",
+                "buttons": [
+                    {
+                        "type": "postback",
+                        "title": "MENU CHÍNH",
+                        "payload": "MAIN_MENU",
+                    },
+                    {
+                        "type": "postback",
+                        "title": "ĐẶT BÀN",
+                        "payload": "RESERVE_TABLE",
+                    },
+                ]
+            }
+        }
+    }
 }
 
 //Sends response messages via the Send API
