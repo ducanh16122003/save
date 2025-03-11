@@ -12,6 +12,8 @@ const IMAGE_MAIN_MENU_3 = "https://s.pro.vn/ge78";
 const IMAGE_VIEW_APPETIZERS = "https://s.pro.vn/UMQM";
 const IMAGE_VIEW_FISH = "https://short.com.vn/XqDR";
 const IMAGE_VIEW_MEAT = "https://s.pro.vn/mYYN";
+
+const IMAGE_BACK_MAIN_MENU = "https://s.pro.vn/mYYN";
 //process.env.NAME_VARIABLES
 let getHomePage = (req, res) => {
     return res.render('homepage.ejs');
@@ -165,6 +167,7 @@ async function handlePostback(sender_psid, received_postback){
         case 'VIEW_FISH':
         case 'VIEW_MEAT':
         
+        case 'BACK_TO_MAIN_MENU':
         default:
             response = {"text": `Oops! I don't know how to respond to postback ${payload}.`}
     }
@@ -303,7 +306,20 @@ let getlunchmenutemplate = () => {
                             "payload": "VIEW_MEAT",
                         },
                     ],
-                }]
+                },
+                {
+                    "title": "Quay trở lại",
+                    "subtitle": "Quay trở lại Menu chính",
+                    "image_url": IMAGE_BACK_MAIN_MENU,
+                    "buttons": [
+                        {
+                            "type": "postback",
+                            "title": "QUAY TRỞ LẠI",
+                            "payload": "BACK_TO_MAIN_MENU",
+                        },
+                    ],
+                },
+            ]
             }
         }
     }
