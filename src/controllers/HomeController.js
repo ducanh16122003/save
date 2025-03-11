@@ -15,17 +15,17 @@ const IMAGE_VIEW_MEAT = "https://s.pro.vn/mYYN";
 
 const IMAGE_BACK_MAIN_MENU = "https://short.com.vn/JP78";
 
-const IMAGE_DETAIL_APPETIZERS_1 = "https://short.com.vn/JP78";
-const IMAGE_DETAIL_APPETIZERS_2 = "https://short.com.vn/JP78";
-const IMAGE_DETAIL_APPETIZERS_3 = "https://short.com.vn/JP78";
+const IMAGE_DETAIL_APPETIZERS_1 = "https://s.pro.vn/HVxs";
+const IMAGE_DETAIL_APPETIZERS_2 = "https://s.pro.vn/dfjD";
+const IMAGE_DETAIL_APPETIZERS_3 = "https://s.pro.vn/nSDb";
 
-const IMAGE_DETAIL_FISH_1 = "https://short.com.vn/JP78";
-const IMAGE_DETAIL_FISH_2 = "https://short.com.vn/JP78";
-const IMAGE_DETAIL_FISH_3 = "https://short.com.vn/JP78";
+const IMAGE_DETAIL_FISH_1 = "https://short.com.vn/njBx";
+const IMAGE_DETAIL_FISH_2 = "https://s.pro.vn/OcA8";
+const IMAGE_DETAIL_FISH_3 = "https://short.com.vn/VNWS";
 
-const IMAGE_DETAIL_MEAT_1 = "https://short.com.vn/JP78";
-const IMAGE_DETAIL_MEAT_2 = "https://short.com.vn/JP78";
-const IMAGE_DETAIL_MEAT_3 = "https://short.com.vn/JP78";
+const IMAGE_DETAIL_MEAT_1 = "https://s.pro.vn/N1NW";
+const IMAGE_DETAIL_MEAT_2 = "https://s.pro.vn/zKlK";
+const IMAGE_DETAIL_MEAT_3 = "https://short.com.vn/pcKS";
 
 //process.env.NAME_VARIABLES
 let getHomePage = (req, res) => {
