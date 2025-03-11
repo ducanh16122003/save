@@ -27,7 +27,7 @@ const IMAGE_DETAIL_MEAT_1 = "https://s.pro.vn/N1NW";
 const IMAGE_DETAIL_MEAT_2 = "https://s.pro.vn/zKlK";
 const IMAGE_DETAIL_MEAT_3 = "https://short.com.vn/pcKS";
 
-const IMAGE_DETAIL_ROOMS = "https://s.pro.vn/qCvb";
+const IMAGE_DETAIL_ROOMS = "https://s.pro.vn/Yc6n";
 
 //process.env.NAME_VARIABLES
 let getHomePage = (req, res) => {
