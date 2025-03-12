@@ -1,0 +1,36 @@
+/*stick footer to bottom */
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+.fix-height {
+    flex: 1;
+}
+
+a, a:hover, a:focus {
+    text-decoration: none;
+}
+
+.title {
+    font-weight: 600;
+    font-size: 30px;
+}
+
+/* Bàn đã có người ngồi */
+.occupied {
+    background-color: #dc3545 !important; /* Màu đỏ */
+}
+
+/* Bàn đang chờ */
+.pending {
+    background-color: #ffc107 !important; /* Màu vàng */
+}
+
+/* Kiểu dáng của sơ đồ bàn (giả lập nhà hàng) */
+#restaurant-layout {
+    max-width: 600px;
+    margin: auto;
+    text-align: center;
+    padding: 20px;
+}
