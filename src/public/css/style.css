@@ -17,6 +17,11 @@ a, a:hover, a:focus {
     font-size: 30px;
 }
 
+.is-invalid + .invalid-feedback {
+    display: block !important;
+}
+
+
 /* Bàn đã có người ngồi */
 .occupied {
     background-color: #dc3545 !important; /* Màu đỏ */
