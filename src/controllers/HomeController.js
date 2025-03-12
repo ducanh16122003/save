@@ -756,8 +756,7 @@ let handlePostReserveTable = async (req, res) => {
         return res.status(200).json({
              message: "ok"
     });
-    }
-    catch (e) {
+    } catch (e) {
         console.log(`lỗi post reserve table:`, e);
         return res.status(500).json({
             message: "error"

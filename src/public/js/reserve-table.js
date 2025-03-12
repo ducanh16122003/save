@@ -14,7 +14,7 @@ window.extAsyncInit = function () {
             // success
             //set psid to input
             $("#psid").val(thread_context.psid);
-            handleClickButtonReserveTable();
+            handleClickButtonReserveTable();    
         },
         function error(err) {
             // error
@@ -63,7 +63,7 @@ function handleClickButtonReserveTable() {
             //close webview
             MessengerExtensions.requestCloseBrowser(function success() {
                 // webview closed
-            }, function error(err) {
+            }, function error(err) {    
                 // an error occurred
                 console.log(err);
             });
