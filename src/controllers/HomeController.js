@@ -742,7 +742,7 @@ let handlePostReserveTable = async (req, res) => {
     try{
         let customerName = "";
         if(req.body.customerName === "") {
-            customerName = "Để trống"
+            customerName = "Để trống";
         }   else customerName = req.body.customerName;
         
         // i demo response with sample text
@@ -764,7 +764,8 @@ let handlePostReserveTable = async (req, res) => {
             message: "error"
         });
     }
-}
+};
+
 module.exports = {
     getHomePage: getHomePage,
     postWebhook: postWebhook,
