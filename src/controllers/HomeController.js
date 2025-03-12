@@ -229,9 +229,11 @@ let sendgetStartedtemplate = () => {
                             "payload": "MAIN_MENU",
                         },
                         {
-                            "type": "postback",
+                            "type": "web_url",
+                            "url": `${process.env.URL_WEB_VIEW_ORDER}`,
                             "title": "ĐẶT BÀN",
-                            "payload": "RESERVE_TABLE",
+                            "webview_height_ratio": "full",
+                            "messenger_extensions": true //false: open the webview in new tab
                         },
                         {
                             "type": "postback",
@@ -276,9 +278,11 @@ let handleSendMainMenus = () => {
                     "image_url": IMAGE_MAIN_MENU_2,
                     "buttons": [
                         {
-                            "type": "postback",
+                            "type": "web_url",
+                            "url": `${process.env.URL_WEB_VIEW_ORDER}`,
                             "title": "ĐẶT BÀN",
-                            "payload": "RESERVE_TABLE",
+                            "webview_height_ratio": "full",
+                            "messenger_extensions": true //false: open the webview in new tab
                         },
                     ],
                 },
@@ -562,9 +566,11 @@ let getButtonRoomTemplate = () => {
                         "payload": "MAIN_MENU",
                     },
                     {
-                        "type": "postback",
+                        "type": "web_url",
+                        "url": `${process.env.URL_WEB_VIEW_ORDER}`,
                         "title": "ĐẶT BÀN",
-                        "payload": "RESERVE_TABLE",
+                        "webview_height_ratio": "full",
+                        "messenger_extensions": true //false: open the webview in new tab
                     },
                 ]
             }
@@ -728,10 +734,15 @@ await request({
     return res.send("Setup persistent menu succeeds!");
 }
 
+let handleReserveTable = (req, res) => {
+    return res.render('reserve-table.ejs');
+}
+
 module.exports = {
     getHomePage: getHomePage,
     postWebhook: postWebhook,
     getWebhook: getWebhook,
     setupProfile: setupProfile,
     setupPersistentMenu: setupPersistentMenu,
+    handleReserveTable: handleReserveTable
 }

@@ -12,6 +12,8 @@ let initwebRoutes = (app) => {
 
     router.post('/webhook', HomeController.postWebhook);
     router.get('/webhook', HomeController.getWebhook)
+
+    router.get('/reserve-table', HomeController.handleReserveTable);
     return app.use('/', router);
 }
 
