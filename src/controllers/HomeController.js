@@ -212,7 +212,7 @@ async function handlePostback(sender_psid, received_postback){
     callSendAPI(sender_psid, response);
 }
 
-let sendgetStartedtemplate = () => {
+let sendgetStartedtemplate = (senderID) => {
     let response = {
         "attachment": {
             "type": "template",
@@ -230,7 +230,7 @@ let sendgetStartedtemplate = () => {
                         },
                         {
                             "type": "web_url",
-                            "url": `${process.env.URL_WEB_VIEW_ORDER}`,
+                            "url": `${process.env.URL_WEB_VIEW_ORDER}/${senderID}`,
                             "title": "ĐẶT BÀN",
                             "webview_height_ratio": "full",
                             "messenger_extensions": true //false: open the webview in new tab
@@ -248,7 +248,7 @@ let sendgetStartedtemplate = () => {
     return response;
     }
 
-let handleSendMainMenus = () => {
+let handleSendMainMenus = (senderID) => {
     let response = {
         "attachment": {
             "type": "template",
@@ -279,7 +279,7 @@ let handleSendMainMenus = () => {
                     "buttons": [
                         {
                             "type": "web_url",
-                            "url": `${process.env.URL_WEB_VIEW_ORDER}`,
+                            "url": `${process.env.URL_WEB_VIEW_ORDER}/${senderID}`,
                             "title": "ĐẶT BÀN",
                             "webview_height_ratio": "full",
                             "messenger_extensions": true //false: open the webview in new tab
@@ -552,7 +552,7 @@ let getImageRoomTemplate = () => {
     return response;
 }
 
-let getButtonRoomTemplate = () => {
+let getButtonRoomTemplate = (senderID) => {
     let response = {
         "attachment": {
             "type": "template",
@@ -567,7 +567,7 @@ let getButtonRoomTemplate = () => {
                     },
                     {
                         "type": "web_url",
-                        "url": `${process.env.URL_WEB_VIEW_ORDER}`,
+                        "url": `${process.env.URL_WEB_VIEW_ORDER}/${senderID}`,
                         "title": "ĐẶT BÀN",
                         "webview_height_ratio": "full",
                         "messenger_extensions": true //false: open the webview in new tab

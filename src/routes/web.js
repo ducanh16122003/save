@@ -13,7 +13,7 @@ let initwebRoutes = (app) => {
     router.post('/webhook', HomeController.postWebhook);
     router.get('/webhook', HomeController.getWebhook)
 
-    router.get('/reserve-table', HomeController.handleReserveTable);
+    router.get('/reserve-table/:senderId', HomeController.handleReserveTable);
     router.post('/reserve-table-ajax', HomeController.handlePostReserveTable);
     return app.use('/', router);
 }
