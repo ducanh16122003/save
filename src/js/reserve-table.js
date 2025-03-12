@@ -18,7 +18,11 @@ window.extAsyncInit = function () {
         },
         function error(err) {
             // error
-            console.log('Lỗi đặt bàn Eric bot', err);
+            console.log('Lỗi đặt bàn Eric bot with MessengerExtensions.getContent', err);
+
+            //run fallback, get userId from URL
+            $("#psid").val(senderId);
+            handleClickButtonReserveTable();
         }
     );
 };
