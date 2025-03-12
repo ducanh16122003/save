@@ -765,5 +765,6 @@ module.exports = {
     setupProfile: setupProfile,
     setupPersistentMenu: setupPersistentMenu,
     handleReserveTable: handleReserveTable,
-    handlePostReserveTable: handlePostReserveTable
+    handlePostReserveTable: handlePostReserveTable,
+    callSendAPI: callSendAPI
 }
