@@ -745,17 +745,23 @@ let handlePostReserveTable = async (req, res) => {
             customerName = "Để trống"
         }    customerName = req.body.customerName;
         
-        let response = {
+        let response1 = {
             "text": `---Thông tin khách hàng đặt bàn---
             \nHọ và tên: ${customerName}
             \nEmail: ${req.body.email}
-            \nSố điện thoại: ${req.body.phoneNumber}`
+            \nSố điện thoại: ${req.body.phoneNumber}
+            `
         };
-    await callSendAPI(req.body.psid, response);
-    return res.status(200).json({message: "success"});
+    await callSendAPI(req.body.psid, response1);
+        return res.status(200).json({
+             message: "ok"
+    });
     }
     catch (e) {
         console.log(`lỗi post reserve table:`, e);
+        return res.status(500).json({
+            message: "error"
+        });
     }
 }
 module.exports = {
