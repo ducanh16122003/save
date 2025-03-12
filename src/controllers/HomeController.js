@@ -795,36 +795,45 @@ let handleReserveTable = (req, res) => {
 }
 
 let handlePostReserveTable = async (req, res) => {
-    try{
+    try {
+        console.log("Received request to reserve table:", req.body);
+
         let username = await getUserName(req.body.psid);
-        //write data to google sheet
-        let data= {
+        console.log("Fetched username:", username);
+
+        // Write data to Google Sheet
+        let data = {
             username: username,
             email: req.body.email,
             phoneNumber: req.body.phoneNumber,
             customerName: req.body.customerName,
         };
         await writeDataToGoogleSheet(data);
+        console.log("Data written to Google Sheet:", data);
+
         let customerName = "";
-        if(req.body.customerName === "") {
+        if (req.body.customerName === "") {
             customerName = await getUserName(req.body.psid);
-        }   else customerName = req.body.customerName;
-        
-        // i demo response with sample text
-        // you can check database for customer order's status
+        } else {
+            customerName = req.body.customerName;
+        }
+        console.log("Customer name:", customerName);
+
+        // Demo response with sample text
         let response11 = {
             "text": `---Thông tin khách hàng đặt bàn---
             \nHọ và tên: ${customerName}
             \nEmail: ${req.body.email}
-            \nSố điện thoại: ${req.body.phoneNumber}
-            `
+            \nSố điện thoại: ${req.body.phoneNumber}`
         };
-    await callSendAPI(req.body.psid, response11);
+        await callSendAPI(req.body.psid, response11);
+        console.log("Sent response to user:", response11);
+
         return res.status(200).json({
-             message: "ok"
-    });
+            message: "ok"
+        });
     } catch (e) {
-        console.log(`lỗi post reserve table:`, e);
+        console.log(`Error in handlePostReserveTable:`, e);
         return res.status(500).json({
             message: "error"
         });
