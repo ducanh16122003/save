@@ -13,6 +13,15 @@ viewEngine(app);
 //config view routes
 webRoutes(app);
 
+app.use((req, res, next) => {
+    res.setHeader(
+        "Content-Security-Policy",
+        "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com;"
+    );
+    next();
+});
+
+
 // Chạy server
 let port = process.env.PORT || 8080;
 

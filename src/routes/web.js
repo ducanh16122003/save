@@ -2,13 +2,6 @@ import express from "express";
 import HomeController from "../controllers/HomeController";
 let router = express.Router();
 let initwebRoutes = (app) => {
-    app.use((req, res, next) => {
-        res.setHeader(
-            "Content-Security-Policy",
-            "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com;"
-        );
-        next();
-    });
     
     router.get("/", HomeController.getHomePage);
 
