@@ -738,11 +738,32 @@ let handleReserveTable = (req, res) => {
     return res.render('reserve-table.ejs');
 }
 
+let handlePostReserveTable = async (req, res) => {
+    try{
+        let customerName = "";
+        if(req.body.customerName) {
+            customerName = "Để trống"
+        }    customerName = req.body.customerName;
+        
+        let response = {
+            "text": `---Thông tin khách hàng đặt bàn---
+            \nHọ và tên: ${customerName}
+            \nEmail: ${req.body.email}
+            \nSố điện thoại: ${req.body.phoneNumber}`
+        };
+    await callSendAPI(req.body.psid, response);
+    return res.status(200).json({message: "success"});
+    }
+    catch (e) {
+        console.log(`lỗi post reserve table:`, e);
+    }
+}
 module.exports = {
     getHomePage: getHomePage,
     postWebhook: postWebhook,
     getWebhook: getWebhook,
     setupProfile: setupProfile,
     setupPersistentMenu: setupPersistentMenu,
-    handleReserveTable: handleReserveTable
+    handleReserveTable: handleReserveTable,
+    handlePostReserveTable: handlePostReserveTable
 }
