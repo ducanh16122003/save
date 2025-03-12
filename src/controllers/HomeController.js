@@ -1,8 +1,13 @@
 import request from "request";
 import chatbotService from "../services/chatbotService.js";
+import moment from "moment";
 require('dotenv').config();
+const { GoogleSpreadsheet } = require('google-spreadsheet');
 
 const page_access_token = process.env.PAGE_ACCESS_TOKEN;
+const SPEADSHEET_ID = process.env.SPEADSHEET_ID;
+const GOOGLE_SERVICE_ACCOUNT_EMAIL = process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL;
+const GOOGLE_PRIVATE_KEY = process.env.GOOGLE_PRIVATE_KEY;
 
 const IMAGE_GET_STARTED = "https://s.pro.vn/k7Mu";
 const IMAGE_MAIN_MENU_1 = "https://short.com.vn/HvjT";
@@ -28,6 +33,33 @@ const IMAGE_DETAIL_MEAT_2 = "https://s.pro.vn/zKlK";
 const IMAGE_DETAIL_MEAT_3 = "https://short.com.vn/pcKS";
 
 const IMAGE_DETAIL_ROOMS = "https://s.pro.vn/Yc6n";
+
+let writeDataToGoogleSheet = async (data) => {
+    
+    let currentDate = new Date();
+    const format = "HH:mm DD/MM/YYYY";
+    let formatedDate = moment(currentDate).format(format);
+    
+    //Initialize the sheet - doc ID is the long id in the sheets URL
+    const doc = new GoogleSpreadsheet(SPEADSHEET_ID);
+    //initialize Auth - see more available options at https://theoephraim.github.io/node-google-spreadsheet/#/getting-started/authentication
+    await doc.useServiceAccountAuth({
+        client_email: JSON.parse(`"${GOOGLE_SERVICE_ACCOUNT_EMAIL}"`),
+        private_key: JSON.parse(`"${GOOGLE_PRIVATE_KEY}"`),
+    });
+
+    await doc.loadInfo(); //Loads document properties and worksheets
+    const sheet = doc.sheetsByIndex[0]; // or use doc.sheetsById[id] or doc.sheetsByTitle[title]
+    
+    //append rows
+    await sheet.addRow(
+        {   
+            "Tên khách hàng": data.customerName,
+            "Địa chỉ Email": data.email,
+            "Số điện thoại": data.phoneNumber,
+            "Thời gian": formatedDate,
+        });
+}  
 
 //process.env.NAME_VARIABLES
 let getHomePage = (req, res) => {
@@ -743,6 +775,13 @@ let handleReserveTable = (req, res) => {
 
 let handlePostReserveTable = async (req, res) => {
     try{
+        //write data to google sheet
+        let data= {
+            customerName: req.body.customerName,
+            email: req.body.email,
+            phoneNumber: req.body.phoneNumber
+        };
+        await writeDataToGoogleSheet(data);
         let customerName = "";
         if(req.body.customerName === "") {
             customerName = "Để trống";
