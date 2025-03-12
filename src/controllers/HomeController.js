@@ -741,9 +741,9 @@ let handleReserveTable = (req, res) => {
 let handlePostReserveTable = async (req, res) => {
     try{
         let customerName = "";
-        if(req.body.customerName) {
+        if(req.body.customerName === "") {
             customerName = "Để trống"
-        }    customerName = req.body.customerName;
+        }   else customerName = req.body.customerName;
         
         let response1 = {
             "text": `---Thông tin khách hàng đặt bàn---
