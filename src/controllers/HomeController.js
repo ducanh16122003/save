@@ -747,21 +747,21 @@ let handlePostReserveTable = async (req, res) => {
         
         // i demo response with sample text
         // you can check database for customer order's status
-        let response1 = {
+        let response11 = {
             "text": `---Thông tin khách hàng đặt bàn---
             \nHọ và tên: ${customerName}
             \nEmail: ${req.body.email}
             \nSố điện thoại: ${req.body.phoneNumber}
             `
         };
-    await callSendAPI(req.body.psid, response1);
+    await callSendAPI(req.body.psid, response11);
         return res.status(200).json({
-            message: "ok"
+             message: "ok"
     });
     } catch (e) {
-        console.log('lỗi post reserve table: ', e);
+        console.log(`lỗi post reserve table:`, e);
         return res.status(500).json({
-            message: "Server error"
+            message: "error"
         });
     }
 };
