@@ -17,39 +17,6 @@ a, a:hover, a:focus {
     font-size: 30px;
 }
 
-/* Phần chứa sơ đồ bàn ăn */
-#table-map {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-    gap: 15px;
-    padding: 20px;
-    background-color: #f8f9fa;
-    border: 2px solid #ccc;
-    border-radius: 10px;
-}
-
-/* Kiểu dáng bàn ăn */
-#table-item {
-    width: 100px;
-    height: 100px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #28a745; /* Màu xanh cho bàn trống */
-    color: white;
-    font-weight: bold;
-    text-align: center;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: transform 0.2s, box-shadow 0.2s;
-}
-
-/* Hiệu ứng hover */
-.table-item:hover {
-    transform: scale(1.1);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
 /* Bàn đã có người ngồi */
 .occupied {
     background-color: #dc3545 !important; /* Màu đỏ */
