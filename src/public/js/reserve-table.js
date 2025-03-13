@@ -65,12 +65,13 @@ function handleClickButtonReserveTable() {
         };
 
         if (!check) {
+            console.log("Data to be sent:", data);
+
             //close webview
             MessengerExtensions.requestCloseBrowser(function success() {
-                // webview closed
+                console.log("Webview closed successfully");
             }, function error(err) {    
-                // an error occurred
-                console.log(err);
+                console.log("Error closing webview:", err);
             });
 
             //send data to node.js server 
@@ -79,12 +80,14 @@ function handleClickButtonReserveTable() {
                 method: "POST",
                 data: data,
                 success: function (data) {
-                    console.log(data);
+                    console.log("Response from server:", data);
                 },
                 error: function (error) {
-                    console.log(error);
+                    console.log("Error from server:", error);
                 }
-            })
+            });
+        } else {
+            console.log("Validation failed");
         }
     });
 }
