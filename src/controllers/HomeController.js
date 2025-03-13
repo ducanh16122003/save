@@ -782,6 +782,7 @@ let handlePostReserveTable = async (req, res) => {
             phoneNumber: req.body.phoneNumber,
         };
         await writeDataToGoogleSheet(data);
+        
         let customerName = "";
         if(req.body.customerName === "") {
             customerName = "Khách hàng";
