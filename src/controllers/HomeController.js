@@ -34,6 +34,26 @@ const IMAGE_DETAIL_MEAT_3 = "https://short.com.vn/pcKS";
 
 const IMAGE_DETAIL_ROOMS = "https://s.pro.vn/Yc6n";
 
+let getUserName = (sender_psid) => {
+    return new Promise((resolve, reject) => {
+    //Send the HTTP request to the Messenger Platform
+    request({
+        "uri": `https://graph.facebook.com/${sender_psid}?fields=first_name,last_name,profile_pic&access_token=${page_access_token}`,
+        "qs" : { "access_token": process.env.page_access_token },
+        "method": "GET",
+    },(err, res, body) => {
+        if (!err) {
+            body = JSON.parse(body);
+            let username = `${body.first_name} ${body.last_name}`;
+            resolve(username);
+        } else {
+            console.error("unable to send message:" + err);
+            reject(err);
+        }
+    });
+    });
+}
+
 let writeDataToGoogleSheet = async (data) => {
     
     let currentDate = new Date();
@@ -54,10 +74,11 @@ let writeDataToGoogleSheet = async (data) => {
     //append rows
     await sheet.addRow(
         {   
-            "Tên khách hàng": data.customerName,
+            "Tên Facebook": data.username,
             "Địa chỉ Email": data.email,
             "Số điện thoại": data.phoneNumber,
             "Thời gian": formatedDate,
+            "Tên khách hàng": data.customerName,
         });
 }  
 
@@ -775,17 +796,18 @@ let handleReserveTable = (req, res) => {
 
 let handlePostReserveTable = async (req, res) => {
     try{
+        let username = await getUserName(req.body.psid);
         //write data to google sheet
         let data= {
-            customerName: req.body.customerName,
+            username: username,
             email: req.body.email,
             phoneNumber: req.body.phoneNumber,
+            customerName: req.body.customerName,
         };
         await writeDataToGoogleSheet(data);
-        
         let customerName = "";
         if(req.body.customerName === "") {
-            customerName = "Khách hàng";
+            customerName = await getUserName(req.body.psid);
         }   else customerName = req.body.customerName;
         
         // i demo response with sample text
