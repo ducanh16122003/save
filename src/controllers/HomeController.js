@@ -777,10 +777,9 @@ let handlePostReserveTable = async (req, res) => {
     try{
         //write data to google sheet
         let data= {
-            username: username,
+            customerName: req.body.customerName,
             email: req.body.email,
             phoneNumber: req.body.phoneNumber,
-            customerName: req.body.customerName,
         };
         await writeDataToGoogleSheet(data);
         let customerName = "";
