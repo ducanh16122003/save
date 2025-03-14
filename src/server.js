@@ -19,7 +19,7 @@ const mysql = require("mysql");
 const db = mysql.createConnection({
     host: "localhost",
     user: "root",
-    password: "1",
+    password: "",
     database: "qlbandat",
     port: 3306
 });
