@@ -13,6 +13,83 @@ viewEngine(app);
 //config view routes
 webRoutes(app);
 
+const mysql = require("mysql");
+
+// Kết nối MySQL
+const db = mysql.createConnection({
+    host: "localhost",
+    user: "root",
+    password: "",
+    database: "qlbandat",
+    port: 3306
+});
+
+db.connect(err => {
+    if (err) throw err;
+    console.log("✅ Kết nối MySQL thành công!");
+});
+
+// Cấu hình server
+app.use(bodyParser.json());
+app.use(express.static("public"));
+app.set("view engine", "ejs");
+
+// API lấy danh sách bàn
+app.get("/tables", (req, res) => {
+    db.query("SELECT * FROM tables", (err, results) => {
+        if (err) return res.status(500).send("Lỗi Server");
+        res.json(results);
+    });
+});
+
+// Thêm bàn mới
+app.post('/tables', (req, res) => {
+    const { name, capacity, position, status } = req.body;
+    if (!name || !capacity || !position || !status) {
+        return res.status(400).json({ message: "Thiếu dữ liệu" });
+    }
+
+    const sql = "INSERT INTO tables (name, capacity, position, status) VALUES (?, ?, ?, ?)";
+    db.query(sql, [name, capacity, position, status], (err, result) => {
+        if (err) {
+            console.error("Lỗi khi thêm bàn:", err);
+            return res.status(500).json({ message: "Lỗi server" });
+        }
+        res.json({ message: "Thêm bàn thành công", id: result.insertId });
+    });
+});
+
+// API cập nhật trạng thái bàn
+app.put('/tables/:id', (req, res) => {
+    const { name, capacity, position, status } = req.body;
+    const { id } = req.params;
+    if (!name || !capacity || !position || !status) {
+        return res.status(400).json({ message: "Thiếu dữ liệu" });
+    }
+
+    const sql = "UPDATE tables SET name = ?, capacity = ?, position = ?, status = ? WHERE id = ?";
+    db.query(sql, [name, capacity, position, status, id], (err, result) => {
+        if (err) {
+            console.error("Lỗi khi cập nhật bàn:", err);
+            return res.status(500).json({ message: "Lỗi server" });
+        }
+        res.json({ message: "Cập nhật bàn thành công" });
+    });
+});
+
+// Xóa bàn
+app.delete("/tables/:id", (req, res) => {
+    db.query("DELETE FROM tables WHERE id=?", [req.params.id], (err, result) => {
+        if (err) return res.status(500).json(err);
+        res.json({ message: "Xóa bàn thành công" });
+    });
+});
+
+// Trang chủ hiển thị sơ đồ bàn ăn
+app.get("/", (req, res) => {
+    res.render("homepage");
+});
+
 // Chạy server
 let port = process.env.PORT || 8080;
 
