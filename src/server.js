@@ -16,24 +16,12 @@ webRoutes(app);
 const mysql = require("mysql");
 
 // Kết nối MySQL
-const pool = mysql.createPool({
+const db = mysql.createConnection({
     host: "localhost",
     user: "root",
     password: "",
     database: "nhahang",
-    port: 3306,
-    connectionLimit: 10
-});
-
-pool.getConnection((err, connection) => {
-  if (err) throw err;
-
-  connection.query('SELECT * FROM tablebooking', (err, results) => {
-    connection.release(); // ✅ Nhớ release
-
-    if (err) throw err;
-    console.log(results);
-  });
+    port: 3306
 });
 
 db.connect(err => {
