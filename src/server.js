@@ -21,26 +21,26 @@ const db = mysql.createConnection({
     user: "root",
     password: "",
     database: "nhahang",
-    port: 3306
+    port: 3306,
+    connectionLimit: 10
 });
 
-db.connect(err => {
+pool.getConnection((err, connection) => {
+  if (err) throw err;
+
+  connection.query('SELECT * FROM tablebooking', (err, results) => {
+    connection.release(); // ✅ Nhớ release
+
     if (err) throw err;
-    console.log("✅ Kết nối MySQL thành công!");
+    console.log(results);
+  });
 });
+
 
 // Cấu hình server
 app.use(bodyParser.json());
 app.use(express.static("public"));
 app.set("view engine", "ejs");
-
-// API lấy danh sách bàn
-app.get("/tablebooking", (req, res) => {
-    db.query("SELECT * FROM tablebooking", (err, results) => {
-        if (err) return res.status(500).send("Lỗi Server");
-        res.json(results);
-    });
-});
 
 // Thêm bàn mới
 app.post('/tablebooking', (req, res) => {
