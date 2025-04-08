@@ -3,21 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hello with Eric</title>
+    <title>Nhà hàng của Bli</title>
 </head>
 
 <body>
-    <h1>Hello world with Eric</h1>
-    <form method="POST" action="/setup-profile">
-        <button type="submit">Setup profile</button>
-    </form>
-
-    <br />
-
-    <form method="POST" action="/setup-persistent-menu">
-        <button type="submit">Setup persistent menu</button>
-    </form>
-
+    <h1>Chào mừng quý khách đến với nhà hàng của Bli</h1>
     <!DOCTYPE html>
     <html lang="vi">
     <head>
@@ -68,7 +58,7 @@
     <script>
 // 🟢 HÀM TẢI DANH SÁCH BÀN
 function loadTables() {
-    fetch("/tables") // Gọi API lấy danh sách bàn
+    fetch("/tablebooking") // Gọi API lấy danh sách bàn
         .then(response => response.json())
         .then(data => {
             console.log("Dữ liệu từ server:", data); // Kiểm tra dữ liệu từ server
@@ -107,7 +97,7 @@ function saveTable() {
 
     if (id) {
         // 🔄 Cập nhật bàn (có ID)
-        fetch(`/tables/${id}`, {
+        fetch(`/tablebooking/${id}`, {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(tableData)
@@ -121,7 +111,7 @@ function saveTable() {
         .catch(error => console.error("Lỗi khi cập nhật bàn:", error));
     } else {
         // ➕ Thêm bàn mới (không có ID)
-        fetch("/tables", {
+        fetch("/tablebooking", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(tableData)
@@ -148,7 +138,7 @@ function editTable(id, name, capacity, position, status) {
 // 🔴 HÀM XÓA BÀN
 function deleteTable(id) {
     if (confirm("Bạn có chắc chắn muốn xóa bàn này?")) {
-        fetch(`/tables/${id}`, {
+        fetch(`/tablebooking/${id}`, {
             method: "DELETE"
         })
         .then(response => response.json())
@@ -178,7 +168,7 @@ function resetForm() {
         <div id="table-map"></div>
     </div>    
 <script>
-fetch("/tables")
+fetch("/tablebooking")
     .then(response => response.json())
     .then(data => {
         const tableList = document.getElementById("table-list");
@@ -220,7 +210,7 @@ fetch("/tables")
     
         const data = { name, capacity, position, status };
     
-        fetch("/tables", {
+        fetch("/tablebooking", {
             method: "POST", // Hoặc "PUT" nếu sửa
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(data)
@@ -234,3 +224,12 @@ fetch("/tables")
         .catch(error => console.error("Lỗi:", error));
     });
     </script>
+    <form method="POST" action="/setup-profile">
+        <button type="submit">Setup profile</button>
+    </form>
+
+    <br />
+
+    <form method="POST" action="/setup-persistent-menu">
+        <button type="submit">Setup persistent menu</button>
+    </form>

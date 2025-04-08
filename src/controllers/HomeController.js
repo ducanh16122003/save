@@ -237,6 +237,9 @@ async function handlePostback(sender_psid, received_postback){
 
             await callSendAPI(sender_psid, response10);
             break;
+        case 'CUSTOMER_CARE':
+            let response11 = {"text": `bạn đã chọn chăm sóc khách hàng, vui lòng chờ để được nhân viên hỗ trợ`}
+            await callSendAPI(sender_psid, response11);
         default:
             response = {"text": `Oops! I don't know how to respond to postback ${payload}.`}
     }
@@ -269,8 +272,8 @@ let sendgetStartedtemplate = (senderID) => {
                         },
                         {
                             "type": "postback",
-                            "title": "HƯỚNG DẪN SỬ DỤNG BOT",
-                            "payload": "GUIDE",
+                            "title": "Chăm sóc khách hàng",
+                            "payload": "CUSTOMER_CARE",
                         }
                     ],
                 }]
