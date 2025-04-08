@@ -16,7 +16,7 @@ webRoutes(app);
 const mysql = require("mysql");
 
 // Kết nối MySQL
-const db = mysql.createConnection({
+const pool = mysql.createPool({
     host: "localhost",
     user: "root",
     password: "",
