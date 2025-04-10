@@ -592,22 +592,148 @@ let getButtonRoomTemplate = (senderID) => {
         "attachment": {
             "type": "template",
             "payload": {
-                "template_type": "button",
-                "text": "Nhà hàng có thể phục vụ tối đa 300 khách",
-                "buttons": [
+                "template_type": "generic",
+                "elements": [
                     {
-                        "type": "postback",
-                        "title": "MENU CHÍNH",
-                        "payload": "MAIN_MENU",
-                    },
-                    {
-                        "type": "web_url",
-                        "url": `${process.env.URL_WEB_VIEW_ORDER}/${senderID}`,
-                        "title": "ĐẶT BÀN",
-                        "webview_height_ratio": "full",
-                        "messenger_extensions": true //false: open the webview in new tab
-                    },
-                ]
+                    "title": "bàn 1",
+                    "subtitle": "Vị trí: trong nhà - 6 người, bàn ghế tiện nghi sạch sẽ",
+                    "image_url": IMAGE_MAIN_MENU_1,
+                    "buttons": [
+                        {
+                            "type": "web_url",
+                            "url": `${process.env.URL_WEB_VIEW_ORDER}/${senderID}`,
+                            "title": "ĐẶT BÀN",
+                            "webview_height_ratio": "full",
+                            "messenger_extensions": true //false: open the webview in new tab
+                        },
+                    ],
+                },
+                {
+                    "title": "bàn 2",
+                    "subtitle": "Vị trí: trong nhà - 6 người, bàn ghế tiện nghi sạch sẽ",
+                    "image_url": IMAGE_MAIN_MENU_1,
+                    "buttons": [
+                        {
+                            "type": "web_url",
+                            "url": `${process.env.URL_WEB_VIEW_ORDER}/${senderID}`,
+                            "title": "ĐẶT BÀN",
+                            "webview_height_ratio": "full",
+                            "messenger_extensions": true //false: open the webview in new tab
+                        },
+                    ],
+                },
+                {
+                    "title": "bàn 3",
+                    "subtitle": "Vị trí: trong nhà - 5 người, bàn ghế tiện nghi sạch sẽ",
+                    "image_url": IMAGE_MAIN_MENU_1,
+                    "buttons": [
+                        {
+                            "type": "web_url",
+                            "url": `${process.env.URL_WEB_VIEW_ORDER}/${senderID}`,
+                            "title": "ĐẶT BÀN",
+                            "webview_height_ratio": "full",
+                            "messenger_extensions": true //false: open the webview in new tab
+                        },
+                    ],
+                },
+                {
+                    "title": "bàn 4",
+                    "subtitle": "Vị trí: trong nhà - 7 người, bàn ghế tiện nghi sạch sẽ",
+                    "image_url": IMAGE_MAIN_MENU_1,
+                    "buttons": [
+                        {
+                            "type": "web_url",
+                            "url": `${process.env.URL_WEB_VIEW_ORDER}/${senderID}`,
+                            "title": "ĐẶT BÀN",
+                            "webview_height_ratio": "full",
+                            "messenger_extensions": true //false: open the webview in new tab
+                        },
+                    ],
+                },
+                {
+                    "title": "bàn 5",
+                    "subtitle": "Vị trí: trong nhà - 4 người, bàn ghế tiện nghi sạch sẽ",
+                    "image_url": IMAGE_MAIN_MENU_1,
+                    "buttons": [
+                        {
+                            "type": "web_url",
+                            "url": `${process.env.URL_WEB_VIEW_ORDER}/${senderID}`,
+                            "title": "ĐẶT BÀN",
+                            "webview_height_ratio": "full",
+                            "messenger_extensions": true //false: open the webview in new tab
+                        },
+                    ],
+                },
+                {
+                    "title": "bàn 1",
+                    "subtitle": "Vị trí: Ngoài trời - 10 người, bàn ghế tiện nghi sạch sẽ",
+                    "image_url": IMAGE_MAIN_MENU_1,
+                    "buttons": [
+                        {
+                            "type": "web_url",
+                            "url": `${process.env.URL_WEB_VIEW_ORDER}/${senderID}`,
+                            "title": "ĐẶT BÀN",
+                            "webview_height_ratio": "full",
+                            "messenger_extensions": true //false: open the webview in new tab
+                        },
+                    ],
+                },
+                {
+                    "title": "bàn 2",
+                    "subtitle": "Vị trí: Ngoài trời - 9 người, bàn ghế tiện nghi sạch sẽ",
+                    "image_url": IMAGE_MAIN_MENU_1,
+                    "buttons": [
+                        {
+                            "type": "web_url",
+                            "url": `${process.env.URL_WEB_VIEW_ORDER}/${senderID}`,
+                            "title": "ĐẶT BÀN",
+                            "webview_height_ratio": "full",
+                            "messenger_extensions": true //false: open the webview in new tab
+                        },
+                    ],
+                },
+                {
+                    "title": "bàn 3",
+                    "subtitle": "Vị trí: Ngoài trời - 8 người, bàn ghế tiện nghi sạch sẽ",
+                    "image_url": IMAGE_MAIN_MENU_1,
+                    "buttons": [
+                        {
+                            "type": "web_url",
+                            "url": `${process.env.URL_WEB_VIEW_ORDER}/${senderID}`,
+                            "title": "ĐẶT BÀN",
+                            "webview_height_ratio": "full",
+                            "messenger_extensions": true //false: open the webview in new tab
+                        },
+                    ],
+                },
+                {
+                    "title": "bàn 4",
+                    "subtitle": "Vị trí: Ngoài trời - 7 người, bàn ghế tiện nghi sạch sẽ",
+                    "image_url": IMAGE_MAIN_MENU_1,
+                    "buttons": [
+                        {
+                            "type": "web_url",
+                            "url": `${process.env.URL_WEB_VIEW_ORDER}/${senderID}`,
+                            "title": "ĐẶT BÀN",
+                            "webview_height_ratio": "full",
+                            "messenger_extensions": true //false: open the webview in new tab
+                        },
+                    ],
+                },
+                {
+                    "title": "bàn 5",
+                    "subtitle": "Vị trí: Ngoài trời - 6 người, bàn ghế tiện nghi sạch sẽ",
+                    "image_url": IMAGE_MAIN_MENU_1,
+                    "buttons": [
+                        {
+                            "type": "web_url",
+                            "url": `${process.env.URL_WEB_VIEW_ORDER}/${senderID}`,
+                            "title": "ĐẶT BÀN",
+                            "webview_height_ratio": "full",
+                            "messenger_extensions": true //false: open the webview in new tab
+                        },
+                    ],
+                }]
             }
         }
     }

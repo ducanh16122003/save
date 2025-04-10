@@ -13,7 +13,6 @@ viewEngine(app);
 //config view routes
 webRoutes(app);
 
-
 // Chạy server
 let port = process.env.PORT || 8080;
 
