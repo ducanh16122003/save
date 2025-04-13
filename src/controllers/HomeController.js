@@ -124,51 +124,6 @@ let getWebhook = (req, res) => {
     }
 }
 
-//handles messages events
-function handleMessage(sender_psid, received_message){
-    let response;
-    
-    //check if the message contains text
-    if (received_message.text) {
-
-        //create the payload for a basic text message, which
-        //will be added to the body of our request to the Send API
-        response = {
-            "text": `you sent the message: "${received_message.text}". Now send me an image!`
-        }
-    } else if (received_message.attachments){
-        
-        //gets the URL of the message attachment
-        let attachment_url = received_message.attachments[0].payload.url;
-        response = {
-            "attachment": {
-                "type": "template",
-                "payload": {
-                    "template_type": "generic",
-                    "elements": [{
-                        "title": "Is this the right picture?",
-                        "subtitle": "Tap a button to answer.",
-                        "image_url": attachment_url,
-                        "buttons": [
-                            {
-                                "type": "postback",
-                                "title": "Yes!",
-                                "payload": "yes",
-                            },
-                            {
-                                "type": "postback",
-                                "title": "No!",
-                                "payload": "no",
-                            }
-                        ],
-                    }]
-                }
-            }
-        }
-    }
-    //sends the response message
-    callSendAPI(sender_psid, response);
-}
 //handles messaging_postbacks events
 async function handlePostback(sender_psid, received_postback){
     let response;
@@ -178,13 +133,6 @@ async function handlePostback(sender_psid, received_postback){
 
     //set the response based on the postback payload
     switch (payload) {
-        case 'yes':
-            response = {"text": `Thanks!`}
-            break;
-        case 'no':
-            response = {"text": `Oops, try sending another image.`}
-            break;
-
         case 'RESTART_BOT':
         case 'GET_STARTED':
             let response2 = {"text": `Chào mừng bạn đến với nhà hàng của Bli.`}
