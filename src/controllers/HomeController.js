@@ -554,6 +554,11 @@ let getButtonRoomTemplate = (senderID) => {
                             "webview_height_ratio": "full",
                             "messenger_extensions": true //false: open the webview in new tab
                         },
+                        {
+                            "type": "postback",
+                            "title": "MENU CHÍNH",
+                            "payload": "MAIN_MENU",
+                        },
                     ],
                 },
                 {
@@ -567,6 +572,11 @@ let getButtonRoomTemplate = (senderID) => {
                             "title": "ĐẶT BÀN",
                             "webview_height_ratio": "full",
                             "messenger_extensions": true //false: open the webview in new tab
+                        },
+                        {
+                            "type": "postback",
+                            "title": "MENU CHÍNH",
+                            "payload": "MAIN_MENU",
                         },
                     ],
                 },
@@ -582,6 +592,11 @@ let getButtonRoomTemplate = (senderID) => {
                             "webview_height_ratio": "full",
                             "messenger_extensions": true //false: open the webview in new tab
                         },
+                        {
+                            "type": "postback",
+                            "title": "MENU CHÍNH",
+                            "payload": "MAIN_MENU",
+                        },
                     ],
                 },
                 {
@@ -595,6 +610,11 @@ let getButtonRoomTemplate = (senderID) => {
                             "title": "ĐẶT BÀN",
                             "webview_height_ratio": "full",
                             "messenger_extensions": true //false: open the webview in new tab
+                        },
+                        {
+                            "type": "postback",
+                            "title": "MENU CHÍNH",
+                            "payload": "MAIN_MENU",
                         },
                     ],
                 },
@@ -610,6 +630,11 @@ let getButtonRoomTemplate = (senderID) => {
                             "webview_height_ratio": "full",
                             "messenger_extensions": true //false: open the webview in new tab
                         },
+                        {
+                            "type": "postback",
+                            "title": "MENU CHÍNH",
+                            "payload": "MAIN_MENU",
+                        },
                     ],
                 },
                 {
@@ -623,6 +648,11 @@ let getButtonRoomTemplate = (senderID) => {
                             "title": "ĐẶT BÀN",
                             "webview_height_ratio": "full",
                             "messenger_extensions": true //false: open the webview in new tab
+                        },
+                        {
+                            "type": "postback",
+                            "title": "MENU CHÍNH",
+                            "payload": "MAIN_MENU",
                         },
                     ],
                 },
@@ -638,6 +668,11 @@ let getButtonRoomTemplate = (senderID) => {
                             "webview_height_ratio": "full",
                             "messenger_extensions": true //false: open the webview in new tab
                         },
+                        {
+                            "type": "postback",
+                            "title": "MENU CHÍNH",
+                            "payload": "MAIN_MENU",
+                        },
                     ],
                 },
                 {
@@ -651,6 +686,11 @@ let getButtonRoomTemplate = (senderID) => {
                             "title": "ĐẶT BÀN",
                             "webview_height_ratio": "full",
                             "messenger_extensions": true //false: open the webview in new tab
+                        },
+                        {
+                            "type": "postback",
+                            "title": "MENU CHÍNH",
+                            "payload": "MAIN_MENU",
                         },
                     ],
                 },
@@ -666,6 +706,11 @@ let getButtonRoomTemplate = (senderID) => {
                             "webview_height_ratio": "full",
                             "messenger_extensions": true //false: open the webview in new tab
                         },
+                        {
+                            "type": "postback",
+                            "title": "MENU CHÍNH",
+                            "payload": "MAIN_MENU",
+                        },
                     ],
                 },
                 {
@@ -679,6 +724,11 @@ let getButtonRoomTemplate = (senderID) => {
                             "title": "ĐẶT BÀN",
                             "webview_height_ratio": "full",
                             "messenger_extensions": true //false: open the webview in new tab
+                        },
+                        {
+                            "type": "postback",
+                            "title": "MENU CHÍNH",
+                            "payload": "MAIN_MENU",
                         },
                     ],
                 }]
