@@ -638,7 +638,7 @@ let getButtonRoomTemplate = (senderID) => {
                     ],
                 },
                 {
-                    "title": "bàn 1",
+                    "title": "bàn 6",
                     "subtitle": "Vị trí: Ngoài trời - 10 người, bàn ghế tiện nghi sạch sẽ",
                     "image_url": IMAGE_MAIN_MENU_1,
                     "buttons": [
@@ -657,7 +657,7 @@ let getButtonRoomTemplate = (senderID) => {
                     ],
                 },
                 {
-                    "title": "bàn 2",
+                    "title": "bàn 7",
                     "subtitle": "Vị trí: Ngoài trời - 9 người, bàn ghế tiện nghi sạch sẽ",
                     "image_url": IMAGE_MAIN_MENU_1,
                     "buttons": [
@@ -676,7 +676,7 @@ let getButtonRoomTemplate = (senderID) => {
                     ],
                 },
                 {
-                    "title": "bàn 3",
+                    "title": "bàn 8",
                     "subtitle": "Vị trí: Ngoài trời - 8 người, bàn ghế tiện nghi sạch sẽ",
                     "image_url": IMAGE_MAIN_MENU_1,
                     "buttons": [
@@ -695,7 +695,7 @@ let getButtonRoomTemplate = (senderID) => {
                     ],
                 },
                 {
-                    "title": "bàn 4",
+                    "title": "bàn 9",
                     "subtitle": "Vị trí: Ngoài trời - 7 người, bàn ghế tiện nghi sạch sẽ",
                     "image_url": IMAGE_MAIN_MENU_1,
                     "buttons": [
@@ -714,7 +714,7 @@ let getButtonRoomTemplate = (senderID) => {
                     ],
                 },
                 {
-                    "title": "bàn 5",
+                    "title": "bàn 10",
                     "subtitle": "Vị trí: Ngoài trời - 6 người, bàn ghế tiện nghi sạch sẽ",
                     "image_url": IMAGE_MAIN_MENU_1,
                     "buttons": [
